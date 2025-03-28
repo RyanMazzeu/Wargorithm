@@ -1,0 +1,8 @@
+body {
+  background-color: #d4dcc7;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  font-family: "Arial";
+}
