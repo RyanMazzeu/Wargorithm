@@ -349,7 +349,7 @@ button[type="submit"]:active {
     margin: 0;
     font-family: "Roboto", sans-serif;
     font-weight: ExtraBold;
-    font-size: 40px;
+    font-size: calc(25px + 1vw);
     margin-bottom: 15px;
   }
 
