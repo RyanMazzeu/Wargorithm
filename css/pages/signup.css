@@ -2,7 +2,7 @@
 .container {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: auto;
   flex-direction: column;
   min-height: 100vh;
@@ -17,7 +17,7 @@ button[type="submit"]:active {
   background: linear-gradient(to right, #334155, #7295dc);
 }
 
-/* ------------ Right Section ------------ */
+/* ------------ Right Section Transformation ------------ */
 .right-side {
   /* Mantenha os estilos existentes e altere: */
   transform: translateX(-100%); /* Posição inicial fora da tela à esquerda */
@@ -32,7 +32,23 @@ button[type="submit"]:active {
     transform: translateX(0);
   }
 }
+/* ------------ Left Section Transformation ------------ */
+.left-side {
+  transform: scale(0.5); /* Começa menor, no centro */
+  opacity: 0; /* Começa meio transparente */
+  animation: expand-and-fade-in 0.8s ease-out forwards;
+}
 
+@keyframes expand-and-fade-in {
+  from {
+    transform: scale(0.5); /* Começa menor */
+    opacity: 0.5; /* Meio transparente */
+  }
+  to {
+    transform: scale(1); /* Preenche o espaço */
+    opacity: 1; /* Totalmente visível */
+  }
+}
 /* ------------ Botão Google Signin ------------ */
 .google-signin {
   display: flex;
@@ -275,6 +291,8 @@ button[type="submit"]:active {
   /* Estilos para a seção direita */
   .right-side {
     width: 40%;
+    height: 100vh;
+    overflow-y: auto;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -288,6 +306,7 @@ button[type="submit"]:active {
 
   /* Exibe a seção esquerda */
   .left-side {
+    height: 100vh;
     display: flex;
     width: 60%;
     overflow: hidden; /* Novo - impede que a imagem ultrapasse os limites */
@@ -298,9 +317,10 @@ button[type="submit"]:active {
   }
 
   .left-side img[alt="Logo"] {
-    max-width: 100%; /* Novo - controla o tamanho máximo */
-    height: auto;
-    object-fit: contain; /* Novo - garante proporção correta */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantém proporção e cobre área */
+    position: fixed; /* Fixa a imagem */
     transition: transform 0.5s ease; /* Opcional - para efeito de hover */
   }
 
@@ -349,7 +369,7 @@ button[type="submit"]:active {
     margin: 0;
     font-family: "Roboto", sans-serif;
     font-weight: ExtraBold;
-    font-size: calc(25px + 1vw);
+    font-size: 40px;
     margin-bottom: 15px;
   }
 
