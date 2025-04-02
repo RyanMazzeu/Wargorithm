@@ -57,7 +57,7 @@ button[type="submit"]:active {
   align-self: center;
   width: 80%; /* Define a largura do botão */
   height: 60px; /* Define a altura do botão */
-  font-size: 40px; /* Define o tamanho da fonte */
+  font-size: 20px; /* Define o tamanho da fonte */
   font-family: "Roboto", sans-serif;
   font-weight: medium;
   padding: 0; /* Remove o espaçamento interno */
@@ -302,6 +302,12 @@ button[type="submit"]:active {
     padding: 0;
     margin: 0;
     order: 2; /* Move a seção para a direita */
+  }
+
+  .right-side img[alt="Logo"] {
+    height: 100%;
+
+    margin: 0; /* Remove margens */
   }
 
   /* Exibe a seção esquerda */
