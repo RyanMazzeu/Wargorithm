@@ -1,11 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="../css/pages/home.css">
+  <title>Wargorithm - Home</title>
+
+  <style>
+
+    body {
+      background-color: #f8f6e3;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #d9d9d9;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 18px;
+    }
+
+    .logout {
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+    }
+
+    .text-content {
+      max-width: 40%;
+    }
+
+    .text-content h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .text-content p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      background-color: black;
+      color: white;
+      padding: 15px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .image-container img {
+      width: 500px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  
+  <header class="navbar">
+    <div class="logo">Wargorithm</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Ranking</a>
+      <a href="#">Comunidade</a>
+      <a href="#" class="logout">Sair</a>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="text-content">
+      <h1>Mostre sua lógica. <br> Vença o desafio!</h1>
+      <p>Wargorithm é um jogo competitivo de programação onde 8 jogadores disputam para resolver desafios primeiro. Suba no ranking e prove suas habilidades!</p>
+      <button class="cta-button">Jogar Agora</button>
+      <p>Milhares de programadores já aceitaram o desafio. Você está pronto?</p>
+    </div>
+    <div class="image-container">
+      <img src="../assets/img/Home_Image.svg" alt="Programadores competindo">
+    </div>
+  </main>
 </body>
+
 </html>
