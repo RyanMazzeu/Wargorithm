@@ -304,12 +304,6 @@ button[type="submit"]:active {
     order: 2; /* Move a seção para a direita */
   }
 
-  .right-side img[alt="Logo"] {
-    height: 100%;
-
-    margin: 0; /* Remove margens */
-  }
-
   /* Exibe a seção esquerda */
   .left-side {
     height: 100vh;
