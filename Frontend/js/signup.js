@@ -1,0 +1,41 @@
+// signup.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("signup-form");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Impede o formulário de recarregar a página
+
+    const nome = document.getElementById("name").value;
+    const senha = document.getElementById("password").value;
+    const confirmarSenha = document.getElementById("confirm-password").value;
+
+    if (senha !== confirmarSenha) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nome, senha }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("✅ Conta criada com sucesso!");
+        console.log(data);
+        // Redireciona para a página de login ou dashboard
+        window.location.href = "../index.html"; // ou o caminho que você quiser
+      } else {
+        alert("❌ Erro ao criar conta: " + data.message);
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("❌ Erro de conexão com o servidor");
+    }
+  });
+});

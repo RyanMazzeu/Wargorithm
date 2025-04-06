@@ -154,7 +154,7 @@ button[type="submit"]:active {
     max-width: 400px;
   }
 
-  form input[type="name"],
+  form input[type="text"],
   form input[type="email"],
   form input[type="password"] {
     font-size: 25px;
@@ -196,7 +196,7 @@ button[type="submit"]:active {
   }
 
   /* Estilos para os inputs do formulário */
-  input[type="name"],
+  input[type="text"],
   input[type="email"],
   input[type="password"] {
     font-family: "Roboto", sans-serif;
@@ -338,7 +338,7 @@ button[type="submit"]:active {
     max-width: 400px;
   }
 
-  form input[type="name"],
+  form input[type="text"],
   form input[type="email"],
   form input[type="password"] {
     font-size: 25px;
@@ -380,7 +380,7 @@ button[type="submit"]:active {
   }
 
   /* Estilos para os inputs do formulário */
-  input[type="name"],
+  input[type="text"],
   input[type="email"],
   input[type="password"] {
     font-family: "Roboto", sans-serif;
