@@ -15,4 +15,28 @@ async function registrarUsuario(req, res) {
   }
 }
 
-module.exports = { registrarUsuario };
+async function loginUsuario(req, res) {
+  try {
+    const { email, senha } = req.body;
+
+    const usuario = await Usuario.findOne({ email });
+    if (!usuario) {
+      return res.status(400).json({ message: "Usuário não encontrado" });
+    }
+
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+    if (!senhaCorreta) {
+      return res.status(400).json({ message: "Senha incorreta" });
+    }
+
+    res.status(200).json({
+      message: "Login bem-sucedido",
+      usuario: { nome: usuario.nome, email: usuario.email },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erro no login" });
+  }
+}
+
+module.exports = { registrarUsuario, loginUsuario };
