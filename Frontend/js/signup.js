@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signup-form");
 
   form.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Impede o formulário de recarregar a página
-
+    event.preventDefault();
     const nome = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
     const senha = document.getElementById("password").value;
     const confirmarSenha = document.getElementById("confirm-password").value;
 
@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nome, senha }),
+        body: JSON.stringify({ nome, email, senha }),
       });
 
       const data = await response.json();
       if (response.ok) {
         alert("✅ Conta criada com sucesso!");
         console.log(data);
-        // Redireciona para a página de login ou dashboard
+
         window.location.href = "../index.html"; // ou o caminho que você quiser
       } else {
         alert("❌ Erro ao criar conta: " + data.message);

@@ -1,9 +1,13 @@
 const Usuario = require("../models/Usuario");
+const bcrypt = require("bcryptjs");
 
 async function registrarUsuario(req, res) {
-  const { nome, senha } = req.body;
   try {
-    const novoUsuario = new Usuario({ nome, senha });
+    const { nome, email, senha } = req.body;
+
+    const senhaHash = await bcrypt.hash(senha, 10);
+
+    const novoUsuario = new Usuario({ nome, email, senha: senhaHash });
     await novoUsuario.save();
     res.status(201).json({ message: "Usuário registrado com sucesso" });
   } catch (err) {

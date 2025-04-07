@@ -309,11 +309,10 @@ button[type="submit"]:active {
     height: 100vh;
     display: flex;
     width: 60%;
-    margin-left: 2vw;
     overflow: hidden; /* Novo - impede que a imagem ultrapasse os limites */
     position: relative; /* Novo - para conter elementos absolutos */
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     order: 1;
   }
 
