@@ -28,7 +28,7 @@ body {
   font-size: 18px;
 }
 .logout {
-  background-color: black;
+  background-color: rgb(255, 254, 254);
   color: white;
   padding: 10px 15px;
   border-radius: 5px;
