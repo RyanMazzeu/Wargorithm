@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         alert("✅ Login bem-sucedido!");
+        localStorage.setItem("token", data.token); // Armazena o token
+
         console.log("Usuário logado:", data.usuario);
         // Redireciona para a página principal, dashboard etc
         window.location.href = "pages/home.html";
