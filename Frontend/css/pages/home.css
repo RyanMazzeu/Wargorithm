@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  padding-bottom: 70px; /* Espaço pro bottom nav */
+  padding-bottom: 100px; /* Espaço pro bottom nav */
 }
 
 .desktop {
@@ -52,15 +52,13 @@ body {
 }
 
 /* Texto principal */
-.header-text {
-  text-align: center;
-  padding: 20px;
-}
-
-.header-text p {
-  font-size: 16px;
-  color: #222;
-  margin-top: 10px;
+.mobile p {
+  font-size: 20px;
+  text-align: justify; /* Justifica o texto para melhor espaçamento */
+  line-height: 1.6; /* Aumenta o espaçamento entre linhas */
+  margin: 20px 30px; /* Ajusta as margens para mais espaço */
+  max-width: 100%;
+  color: #000000; /* Cor do texto */
 }
 
 /* Bottom Navigation */
@@ -69,7 +67,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 100px;
   background-color: #2d2f4f;
   display: flex;
   justify-content: space-around;
@@ -86,14 +84,14 @@ body {
 
 .bottom-nav a img,
 .bottom-nav a svg {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 3px;
 }
 
 .bottom-nav a:nth-child(3) img {
-  width: 80px; /* Aumenta o tamanho apenas do ícone da Community */
-  height: 80px;
+  width: 100px; /* Aumenta o tamanho apenas do ícone da Community */
+  height: 100px;
 }
 
 /* Active */
@@ -106,6 +104,10 @@ body {
 
 /* Deixar responsivo */
 @media (min-width: 768px) {
+  .mobile {
+    display: none; /* Esconde o mobile por padrão */
+  }
+
   .bottom-nav {
     display: none; /* Some no desktop, aparece só no mobile */
   }
