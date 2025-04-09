@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 1. Verificação inicial do token
   const token = localStorage.getItem("token");
+  console.log("Token carregado:", token);
   if (!token) {
     window.location.href = "../index.html";
     return;
@@ -23,12 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const userData = await response.json();
 
-    // 3. Atualizar a UI com os dados do usuário
-    userNameElement.textContent = userData.nome;
-    logoutButton.parentNode.insertBefore(userNameElement, logoutButton);
-
     // 4. Configurar o botão de jogar
-    document.querySelector(".cta-button").addEventListener("click", () => {
+    document.querySelector(".play-button").addEventListener("click", () => {
       if (!localStorage.getItem("token")) {
         alert("Por favor faça login novamente");
         window.location.href = "../index.html";
