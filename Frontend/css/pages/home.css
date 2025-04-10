@@ -68,9 +68,9 @@ body {
   left: 0;
   right: 0;
   height: 100px;
-  background-color: #2d2f4f;
+  background-color: #39485d;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   border-top: 1px solid #ccc;
   z-index: 100;
@@ -79,6 +79,7 @@ body {
 .bottom-nav a {
   display: flex;
   flex-direction: column;
+
   align-items: center;
 }
 
@@ -101,17 +102,20 @@ body {
   width: 80px; /* Aumenta o tamanho apenas do ícone da Community */
   height: 80px;
 }
+
 /* Active */
 .bottom-nav a.active {
   background-color: #000000;
-  border: 2px solid #ffffff;
-  color: #000ed4;
+  border: 5px solid rgb(255, 255, 255);
+  color: #26255a;
   border-radius: 50%;
   padding: 10px;
 }
-
+.bottom-nav a.desktop {
+  display: none;
+}
 /* Deixar responsivo */
-@media (min-width: 768px) {
+@media (orientation: landscape) {
   .mobile {
     display: none; /* Esconde o mobile por padrão */
   }
