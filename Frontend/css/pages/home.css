@@ -114,17 +114,49 @@ body {
 .bottom-nav a.desktop {
   display: none;
 }
-/* Deixar responsivo */
+/* VERSÃO DESKTOP \/ */
 @media (orientation: landscape) {
   .mobile {
-    display: none; /* Esconde o mobile por padrão */
+    display: none;
+  }
+  .navbar {
+    background-color: #c5cfb5;
   }
 
   .bottom-nav {
-    display: none; /* Some no desktop, aparece só no mobile */
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: start;
+    justify-content: flex-end;
+
+    background-color: transparent;
+    text-align: right;
+  }
+  .bottom-nav a {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .bottom-nav a.active {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .bottom-nav a {
+    text-decoration: none;
+  }
+  .bottom-nav a.desktop {
+    display: block;
   }
 
   .desktop {
-    display: block; /* Mostra o desktop */
+    display: block;
   }
 }
