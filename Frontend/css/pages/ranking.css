@@ -89,8 +89,8 @@ body {
 }
 
 .bottom-nav a:nth-child(2) img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 
 .bottom-nav a:nth-child(3) img {
@@ -99,8 +99,8 @@ body {
 }
 
 .bottom-nav a:nth-child(4) img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 
 /* Active */
@@ -109,7 +109,7 @@ body {
   border: 5px solid rgb(255, 255, 255);
   color: #26255a;
   border-radius: 50%;
-  padding: 10px;
+  padding: 1px;
 }
 .bottom-nav a.desktop {
   display: none;

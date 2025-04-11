@@ -94,12 +94,12 @@ body {
 }
 
 .bottom-nav a:nth-child(3) img {
-  width: 100px; /* Aumenta o tamanho apenas do ícone da Community */
+  width: 100px;
   height: 100px;
 }
 
 .bottom-nav a:nth-child(4) img {
-  width: 80px; /* Aumenta o tamanho apenas do ícone da Community */
+  width: 80px;
   height: 80px;
 }
 
