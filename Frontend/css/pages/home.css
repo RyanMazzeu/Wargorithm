@@ -68,7 +68,7 @@ body {
   left: 0;
   right: 0;
   height: 100px;
-  background-color: #39485d;
+  background-color: #949f81;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -107,7 +107,6 @@ body {
 .bottom-nav a.active {
   background-color: #000000;
   border: 5px solid rgb(255, 255, 255);
-  color: #26255a;
   border-radius: 50%;
   padding: 10px;
 }
@@ -196,9 +195,10 @@ body {
     height: auto;
   }
   .play-button.desktop {
-    margin-top: 40px;
+    margin-top: 60px;
+    margin-right: 20px;
     display: inline-block;
-    font-size: 18px;
+    font-size: 30px;
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
@@ -220,22 +220,22 @@ body {
     order: 1; /* Move o texto para a esquerda */
   }
   .header-text.desktop h1 {
-    font-size: 36px; /* Aumenta o tamanho do título */
+    font-size: 65px; /* Aumenta o tamanho do título */
     margin-bottom: 20px; /* Espaçamento abaixo do título */
   }
 
   .header-text.desktop p {
-    font-size: 18px; /* Tamanho do texto do meio */
-    margin-right: 40px; /* Aumenta a distância da direita */
+    font-size: 25px; /* Tamanho do texto do meio */
+    margin-right: 50px; /* Aumenta a distância da direita */
     line-height: 1.8; /* Ajusta o espaçamento entre linhas */
   }
 
   .header-text.desktop .subtext.desktop {
-    font-size: 14px; /* Diminui o tamanho do texto */
+    font-size: 20px; /* Diminui o tamanho do texto */
     display: inline-block; /* Coloca ao lado do botão */
     margin-left: 10px; /* Espaçamento à esquerda do botão */
     vertical-align: middle; /* Alinha verticalmente ao botão */
-    max-width: 200px; /* <<< aqui limita a largura */
+    max-width: 250px; /* <<< aqui limita a largura */
     white-space: normal; /* <<< garante que pode quebrar a linha */
   }
 }
