@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/pages/profile.css">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <title>Wargorithm - Home</title>
 </head>
 
@@ -30,20 +34,18 @@
         <img class="mobile" src="../assets/img/ranking.svg" alt="Ranking">
         <p class="desktop">Ranking</p>
       </a>
-      <a href="../index.html" alt="Leave" class="desktop">
-        <p class="desktop">Leave</p>
-      </a>
+      <button id="logout-button" alt="Leave" class="desktop">Leave</button>
     </div>
   </nav>
 
   <header class="header">
     <div class="profile-container">
       <div class="profile-card">
-        <img src="../assets/img/profile.png" alt="Profile Picture" class="profile-picture">
+        <img src="../assets/img/profilepicture.svg" alt="Profile Picture" class="profile-picture">
         <div class="profile-header">
           <h1>Profile</h1>
           <a href="#">
-            <img src="../assets/img/edit.svg" alt="Edit Profile" style="width: 24px; height: 24px;">
+            <img src="../assets/img/edit.svg" alt="Edit Profile">
           </a>
         </div>
         <div class="profile-details">
@@ -64,15 +66,12 @@
             <p>rsda@gmail.com</p>
           </div>
         </div>
-        <div>
-          <button>Logout</button>
-        </div>
       </div>
-
+    </div>
 
   </header>
 </body>
 <script src="../js/auth.js"></script>
-<script src="../js/home.js"></script>
+<script src="../js/profile.js"></script>
 
 </html>

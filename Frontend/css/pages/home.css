@@ -163,10 +163,12 @@ body {
     padding: 0;
   }
 
-  .bottom-nav a.desktop {
+  .bottom-nav button {
+    cursor: pointer;
     display: block;
     border: 2px solid #000;
     color: #fff;
+    font-size: large;
     background-color: #000;
     padding: 8px 15px 8px 15px;
   }

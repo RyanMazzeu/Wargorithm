@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.location.href = "../index.html"; // ou o caminho que você quiser
       } else {
-        alert("❌ Erro ao criar conta: " + data.message);
+        alert("❌ Erro ao criar conta!");
       }
     } catch (error) {
       console.error("Erro:", error);

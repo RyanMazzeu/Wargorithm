@@ -8,9 +8,3 @@ function authFetch(url, options = {}) {
   };
   return fetch(url, options);
 }
-
-// Opcional: Adicione outras funções relacionadas à autenticação
-function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "/";
-}
