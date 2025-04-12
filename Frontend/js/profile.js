@@ -1,9 +1,3 @@
-document.getElementById("logout-button").addEventListener("click", (e) => {
-  e.preventDefault();
-  localStorage.removeItem("token");
-  window.location.href = "../index.html";
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
   window.addEventListener("pageshow", function (event) {
     const token = localStorage.getItem("token");

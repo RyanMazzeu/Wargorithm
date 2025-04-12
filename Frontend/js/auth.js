@@ -8,3 +8,18 @@ function authFetch(url, options = {}) {
   };
   return fetch(url, options);
 }
+document.addEventListener("DOMContentLoaded", async () => {
+  document.getElementById("logout-button").addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.href = "../index.html";
+  });
+
+  // 1. Verificação inicial do token
+  window.addEventListener("pageshow", function (event) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "../index.html";
+    }
+  });
+});
