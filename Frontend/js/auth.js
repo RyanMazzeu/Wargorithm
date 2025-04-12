@@ -9,6 +9,7 @@ function authFetch(url, options = {}) {
   return fetch(url, options);
 }
 document.addEventListener("DOMContentLoaded", async () => {
+  // 2. Logout
   document.getElementById("logout-button").addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
