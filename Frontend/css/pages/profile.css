@@ -19,6 +19,7 @@
   justify-content: center;
   margin: 0 auto;
   height: calc(100vh - 100px - 93.75px); /* desconta a altura da navbar fixa */
+  font-size: 30px;
 
   .profile-details {
     display: flex;
@@ -31,12 +32,12 @@
     .detail-pair {
       display: flex;
       align-items: center;
-      gap: 12px; /* espaço entre o ícone e o texto */
+      gap: 30px; /* espaço entre o ícone e o texto */
     }
 
     .detail-icon {
-      width: 24px;
-      height: 24px;
+      width: 50px;
+      height: 50px;
       flex-shrink: 0;
     }
   }
@@ -48,8 +49,9 @@
     gap: 20px;
   }
   .profile-picture {
-    width: 120px;
-    margin-bottom: 4vh;
+    width: 150px;
+    margin-top: 25px;
+    margin-bottom: 80px;
   }
 
   button {
@@ -68,7 +70,7 @@
     font-family: "Inter", sans-serif;
     font-weight: bold;
     font-size: 20px;
-
+    margin-top: 30px;
     img {
       width: 50px;
       height: 50px;
@@ -86,6 +88,21 @@
       margin-bottom: 50px; /* Adiciona espaço entre cada item */
     }
   }
+}
+
+@media (max-height: 800px) {
+  /* Adicione aqui os estilos que deseja aplicar para alturas máximas de 800px */
+  .logo, h2{
+    display: none;
+  }
+  .profile-picture {
+    display: none;
+  }
+
+  .profile-header {
+    display: none;
+  }
+
 }
 
 @media (orientation: landscape) {

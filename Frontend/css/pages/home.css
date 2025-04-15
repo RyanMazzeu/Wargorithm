@@ -3,13 +3,11 @@
   height: 70px;
 }
 
-
 .notification-icon {
   width: 24px;
   height: 24px;
   margin: 0;
 }
-
 
 /* Estilo da imagem principal */
 .header-image img {
@@ -29,4 +27,13 @@
   margin: 20px 30px; /* Ajusta as margens para mais espaço */
   max-width: 100%;
   color: #000000; /* Cor do texto */
+}
+
+@media (orientation: landscape) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 82vh; /* Faz com que a altura ocupe toda a tela */
+  }
 }
