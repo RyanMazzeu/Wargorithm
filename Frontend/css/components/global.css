@@ -6,10 +6,16 @@
 }
 .logo img {
   margin: 0;
-  margin-top: 10px;
-  margin-left: 10px;
   position: static;
   height: 60px;
+}
+
+h2 {
+  margin-top: 1vh;
+  font-size: 50px;
+  text-align: center; /* Centraliza o título */
+  color: #000000; /* Cor do texto */
+  font-family: "Orbitron", sans-serif;
 }
 
 /* Estilo geral do body */
@@ -164,9 +170,7 @@ body {
     white-space: normal; /* <<< garante que pode quebrar a linha */
   }
 
-  .mobile {
-    display: none;
-  }
+
   .navbar .logo {
     margin-left: 5vw;
   }
