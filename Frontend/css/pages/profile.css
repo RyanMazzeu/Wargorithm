@@ -19,7 +19,7 @@
   justify-content: center;
   margin: 0 auto;
   height: calc(100vh - 100px - 93.75px); /* desconta a altura da navbar fixa */
-  font-size: 30px;
+  font-size: calc(1vh + 20px);
 
   .profile-details {
     display: flex;
@@ -51,7 +51,7 @@
   .profile-picture {
     width: 150px;
     margin-top: 25px;
-    margin-bottom: 80px;
+    margin-bottom: 2vh;
   }
 
   button {
@@ -83,16 +83,13 @@
       transform: scale(1.1);
       transition: all 0.2s ease-in-out;
     }
-
-    .detail-pair {
-      margin-bottom: 50px; /* Adiciona espaço entre cada item */
-    }
   }
 }
 
-@media (max-height: 800px) {
+@media (max-height: 750px) {
   /* Adicione aqui os estilos que deseja aplicar para alturas máximas de 800px */
-  .logo, h2{
+  .logo,
+  h2 {
     display: none;
   }
   .profile-picture {
@@ -102,7 +99,6 @@
   .profile-header {
     display: none;
   }
-
 }
 
 @media (orientation: landscape) {

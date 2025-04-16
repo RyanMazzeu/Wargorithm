@@ -8,15 +8,6 @@
   min-height: 100vh;
 }
 
-/* ------------ Botão Submit (Hover e Active) ------------ */
-button[type="submit"]:hover {
-  background: linear-gradient(to right, #334155, #4c80ea);
-}
-
-button[type="submit"]:active {
-  background: linear-gradient(to right, #334155, #7295dc);
-}
-
 /* ------------ Right Section Transformation ------------ */
 .right-side {
   /* Mantenha os estilos existentes e altere: */
@@ -49,6 +40,19 @@ button[type="submit"]:active {
     opacity: 1; /* Totalmente visível */
   }
 }
+/* Estilos para os inputs do formulário */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 25px;
+}
 /* ------------ Botão Google Signin ------------ */
 .google-signin {
   display: flex;
@@ -68,6 +72,7 @@ button[type="submit"]:active {
   background-color: #333333; /* Cor de fundo */
   color: white; /* Cor do texto */
   border: none;
+  margin: 0;
 }
 
 .google-signin img {
@@ -79,6 +84,8 @@ button[type="submit"]:active {
 }
 
 .google-signin:hover {
+  transform: scale(0.98);
+
   background: linear-gradient(
     to right,
     #333333,
@@ -87,6 +94,7 @@ button[type="submit"]:active {
 }
 
 .google-signin:active {
+  transform: scale(0.98);
   background: linear-gradient(
     to right,
     #4e4e4e,
@@ -96,12 +104,19 @@ button[type="submit"]:active {
 
 /* ------------ Account Prompt ------------ */
 .account-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.account-prompt p {
+  margin-top: 5px;
   width: 100%;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
   color: #000000;
-  text-align: center;
-  margin-bottom: 0px;
+  margin: 0 auto;
 }
 
 .account-prompt .pink-link {
@@ -117,7 +132,10 @@ button[type="submit"]:active {
 
 /* ------------ Footer Info ------------ */
 .footer-info .copyright {
+  margin: 0;
   margin-bottom: 0px;
+  font-size: 15px;
+  justify-self: center;
 }
 
 /* ------------ Mobile Styles (Portrait Orientation) ------------ */
@@ -138,9 +156,6 @@ button[type="submit"]:active {
     margin: 0;
   }
 
-  .right-side img[alt="Logo"] {
-    margin: 0; /* Maintain aspect ratio */
-  }
   /* Oculta a seção esquerda */
   .left-side {
     display: none;
@@ -152,12 +167,6 @@ button[type="submit"]:active {
     flex-direction: column;
     width: 100%;
     max-width: 400px;
-  }
-
-  form input[type="name"],
-  form input[type="email"],
-  form input[type="password"] {
-    font-size: 25px;
   }
 
   /* Estilos para o botão submit no mobile */
@@ -181,32 +190,12 @@ button[type="submit"]:active {
     margin-right: auto; /* Centraliza horizontalmente */
   }
 
-  /* Estilos para o rodapé no mobile */
-  .footer-info {
-    font-size: 15px;
-  }
-
   /* Título mobile */
   h2.mobile-text {
     margin: 0;
     font-family: "Roboto", sans-serif;
-    font-weight: ExtraBold;
     font-size: 40px;
     margin-bottom: 15px;
-  }
-
-  /* Estilos para os inputs do formulário */
-  input[type="name"],
-  input[type="email"],
-  input[type="password"] {
-    font-family: "Roboto", sans-serif;
-    font-weight: Regular;
-    width: 100%;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    max-width: 100%;
-    box-sizing: border-box;
   }
 
   /* ------------ Input Container ------------ */
@@ -277,13 +266,11 @@ button[type="submit"]:active {
   }
 }
 
-/* ------------ Estilos para Desktop ------------ */
-
 @media (orientation: landscape) {
   /* Estilos para o container principal */
   .container {
     display: flex;
-    flex-direction: row; /* Alinha os elementos lado a lado */
+    flex-direction: row;
     width: 100%;
     height: 100%;
   }
@@ -292,6 +279,7 @@ button[type="submit"]:active {
   .right-side {
     width: 40%;
     height: 100vh;
+    max-height: 100vh;
     overflow-y: auto;
     flex-grow: 1;
     display: flex;
@@ -301,156 +289,149 @@ button[type="submit"]:active {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    order: 2; /* Move a seção para a direita */
-  }
+    order: 2;
 
-  /* Exibe a seção esquerda */
+    img[alt="Logo"] {
+      margin: 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 400px;
+      justify-self: center;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      font-size: 30px;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      padding: 0;
+      border-radius: 10px;
+      max-width: 350px;
+      background: linear-gradient(to right, #334155, #4c6890);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      padding: 10px 0; /* Adiciona espaçamento interno */
+    }
+    img {
+      display: flex;
+      justify-self: center;
+    }
+
+    h3.desktop-text {
+      justify-self: center;
+    }
+
+    /* Título mobile */
+    h2.mobile-text {
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+      font-size: 40px;
+      margin-bottom: 15px;
+      justify-self: center;
+    }
+
+    /* ------------ Input Container ------------ */
+    .input-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      padding-bottom: 5px; /* Diminua esse valor para aproximar o texto da linha */
+      padding-top: 30px;
+      border-bottom: 2px solid gray;
+      outline: none;
+      background: transparent;
+      transition: border-color 0.3s ease-in-out;
+    }
+    .input-container input:focus {
+      border-bottom: 2px solid white; /* Linha branca ao focar */
+      outline: none;
+      caret-color: white;
+    }
+    .input-container label {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      color: gray;
+      transition: all 0.3s ease-in-out;
+      pointer-events: none;
+    }
+    .input-container input:focus + label,
+    .input-container input:not(:placeholder-shown) + label {
+      top: 0;
+      font-size: 20px;
+      color: black;
+    }
+    .input-container .forgot-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      font-size: 30px;
+      color: #ff00e0; /* Altere a cor conforme sua preferência */
+      font-weight: semi-bold;
+    }
+    .input-container .forgot-password:hover {
+      color: #ff00e15f; /* Altere a cor conforme sua preferência */
+    }
+    /* Oculta o link quando o usuário digita (quando o input não mostra o placeholder) */
+    .input-container input:not(:placeholder-shown) ~ .forgot-password {
+      display: none;
+    }
+
+    /* ------------ Seção "Or" ------------ */
+    .or {
+      font-family: "Roboto", sans-serif;
+      font-weight: Regular;
+      font-size: 20px;
+      color: #000000;
+      text-align: center;
+      margin: 10px;
+    }
+
+  }
+  /* Estilos para o rodapé no mobile */
+
   .left-side {
     height: 100vh;
     display: flex;
     width: 60%;
-    overflow: hidden; /* Novo - impede que a imagem ultrapasse os limites */
-    position: relative; /* Novo - para conter elementos absolutos */
+    overflow: hidden;
+    position: relative;
     align-items: center;
     justify-content: center;
     order: 1;
+    img[alt="Logo"] {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Mantém proporção e cobre toda a área */
+      position: fixed; /* Fixa a imagem */
+      transition: transform 0.5s ease; /* Opcional - para efeito de hover */
+    }
   }
+}
+button[type="submit"]:hover {
+  transform: scale(0.98);
+  background: linear-gradient(to right, #3d4c62, #6984a9);
+}
 
-  .left-side img[alt="Logo"] {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Mantém proporção e cobre área */
-    position: fixed; /* Fixa a imagem */
-    transition: transform 0.5s ease; /* Opcional - para efeito de hover */
-  }
-
-  /* Estilos para o formulário */
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  form input[type="name"],
-  form input[type="email"],
-  form input[type="password"] {
-    font-size: 25px;
-  }
-
-  /* Estilos para o botão submit no mobile */
-  button[type="submit"] {
-    width: 100%; /* Define a largura do botão */
-    height: 60px; /* Define a altura do botão */
-    font-size: 30px; /* Define o tamanho da fonte */
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    padding: 0; /* Remove o espaçamento interno */
-    margin-bottom: 20px;
-    border-radius: 10px;
-    max-width: 350px;
-    background: linear-gradient(to right, #334155, #4c6890);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    display: block; /* Garante que o botão seja tratado como um bloco */
-    margin-left: auto; /* Centraliza horizontalmente */
-    margin-right: auto; /* Centraliza horizontalmente */
-  }
-
-  /* Estilos para o rodapé no mobile */
-  .footer-info {
-    font-size: 15px;
-  }
-
-  /* Título mobile */
-  h2.mobile-text {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    font-weight: ExtraBold;
-    font-size: 40px;
-    margin-bottom: 15px;
-  }
-
-  /* Estilos para os inputs do formulário */
-  input[type="name"],
-  input[type="email"],
-  input[type="password"] {
-    font-family: "Roboto", sans-serif;
-    font-weight: Regular;
-    width: 100%;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* ------------ Input Container ------------ */
-  .input-container {
-    position: relative;
-    width: 100%;
-    margin-bottom: 30px;
-  }
-
-  .input-container input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    padding-bottom: 5px; /* Diminua esse valor para aproximar o texto da linha */
-    padding-top: 30px;
-    border-bottom: 2px solid gray;
-    outline: none;
-    background: transparent;
-    transition: border-color 0.3s ease-in-out;
-  }
-  .input-container input:focus {
-    border-bottom: 2px solid white; /* Linha branca ao focar */
-    outline: none;
-    caret-color: white;
-  }
-  .input-container label {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 30px;
-    color: gray;
-    transition: all 0.3s ease-in-out;
-    pointer-events: none;
-  }
-  .input-container input:focus + label,
-  .input-container input:not(:placeholder-shown) + label {
-    top: 0;
-    font-size: 20px;
-    color: black;
-  }
-  .input-container .forgot-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-    font-size: 30px;
-    color: #ff00e0; /* Altere a cor conforme sua preferência */
-    font-weight: semi-bold;
-  }
-  .input-container .forgot-password:hover {
-    color: #ff00e15f; /* Altere a cor conforme sua preferência */
-  }
-  /* Oculta o link quando o usuário digita (quando o input não mostra o placeholder) */
-  .input-container input:not(:placeholder-shown) ~ .forgot-password {
-    display: none;
-  }
-
-  /* ------------ Seção "Or" ------------ */
-  .or {
-    font-family: "Roboto", sans-serif;
-    font-weight: Regular;
-    font-size: 30px;
-    color: #000000;
-    text-align: center;
-    margin: 10px;
-  }
+button[type="submit"]:active {
+  transform: scale(0.98);
+  background: linear-gradient(to right, rgb(76, 94, 120), #7991b3);
 }
