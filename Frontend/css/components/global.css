@@ -11,7 +11,7 @@
 }
 
 h2 {
-  margin-top: 1vh;
+  margin-top: 0 auto;
   font-size: 50px;
   text-align: center; /* Centraliza o título */
   color: #000000; /* Cor do texto */
@@ -26,7 +26,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  padding-bottom: 100px; /* Espaço pro bottom nav */
 }
 
 .desktop {

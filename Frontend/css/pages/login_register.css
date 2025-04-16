@@ -120,6 +120,7 @@ input[type="password"] {
 }
 
 .account-prompt .pink-link {
+  margin-left:5px;
   color: #ff00e0;
   text-decoration: none;
   font-weight: bold;
