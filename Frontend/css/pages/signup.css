@@ -1,0 +1,10 @@
+.right-side img[alt="Logo"] {
+  width: 5vw
+}
+
+
+@media (orientation: portrait) {
+  .right-side img[alt="Logo"] {
+    width: 10vw;
+  }
+}
