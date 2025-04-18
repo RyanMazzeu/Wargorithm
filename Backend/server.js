@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 // Middlewares
 app.use(cors());
@@ -18,6 +18,6 @@ connectDB();
 app.use("/api/usuarios", require("./routes/usuarios"));
 
 // Startando o servidor
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`🚀 Servidor rodando na porta ${port}`);
 });
