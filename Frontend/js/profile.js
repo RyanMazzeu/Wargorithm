@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
+    const host = window.location.hostname;
     const response = await authFetch(
-      "http://localhost:5000/api/usuarios/perfil",
+      `http://${host}:5000/api/usuarios/perfil`,
       {
         method: "GET",
       }
