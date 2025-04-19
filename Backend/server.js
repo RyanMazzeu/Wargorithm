@@ -6,12 +6,23 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT;
+const allowedOrigins = [
+  "https://wargorithm.vercel.app", // seu frontend Vercel
+  "http://localhost:5000", // caso teste local
+  "http://127.0.0.1:5000",
+  undefined, // ← ESSENCIAL pro Postman/cURL
+];
 
-// Middlewares
 app.use(
   cors({
-    origin: "https://wargorithm.vercel.app",
-    credentials: true, // ← ESSENCIAL pra cookies/autenticação
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 
