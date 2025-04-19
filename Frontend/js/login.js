@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (error) {
       console.error("Erro:", error);
-      alert("❌ Erro de conexão com o servidor");
+      alert("❌ Erro de conexão com o servidor" + "Erro:" + error);
     }
   });
 });
