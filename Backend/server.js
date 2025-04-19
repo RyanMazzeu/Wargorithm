@@ -8,7 +8,13 @@ const app = express();
 const port = process.env.PORT;
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://wargorithm.vercel.app",
+    credentials: true, // ← ESSENCIAL pra cookies/autenticação
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
