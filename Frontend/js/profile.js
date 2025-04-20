@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-    const host = window.location.hostname;
+    const API_URL = "https://wargorithm.onrender.com";
     const response = await authFetch(
-      `http://${host}:5000/api/usuarios/perfil`,
+      `${API_URL}/api/usuarios/perfil`,
       {
         method: "GET",
       }

@@ -10,12 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const senha = document.getElementById("password").value;
 
     try {
-      const isLocalhost = ["localhost", "127.0.0.1"].includes(
-        window.location.hostname
-      );
-      const API_URL = isLocalhost
-        ? "http://localhost:5000"
-        : "https://wargorithm-api.onrender.com"; // você vai mudar aqui depois de subir o back
+      const API_URL = "https://wargorithm.onrender.com";
 
       const response = await fetch(`${API_URL}/api/usuarios/login`, {
         method: "POST",
