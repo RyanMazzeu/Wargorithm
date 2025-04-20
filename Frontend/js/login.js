@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const API_URL = "https://wargorithm.onrender.com";
-
+      //  const API_URL = "http://localhost:5000"; // URL do seu servidor local
       const response = await fetch(`${API_URL}/api/usuarios/login`, {
         method: "POST",
         headers: {
