@@ -112,7 +112,10 @@ const listarAmigos = async (req, res) => {
     }
   });
 
-  res.json({ amigos, pendentesRecebidos, pendentesEnviados });
+  res.json({
+    amigos,
+    pendentes: [...pendentesRecebidos, ...pendentesEnviados],
+  });
 };
 
 module.exports = {

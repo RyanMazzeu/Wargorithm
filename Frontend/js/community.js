@@ -1,6 +1,6 @@
+import API_URL from "./url.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  //const API_URL = "http://localhost:5000";
-  const API_URL = "https://wargorithm.onrender.com";
   const input = document.getElementById("search-input");
 
   let amigosIds = [];
@@ -65,9 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // atualiza listas de IDs para filtrar na busca
     amigosIds = data.amigos.map((f) => f.amigo._id);
-    pendentesIds = data.pendentes.map((p) => p.amigo._id);
+    pendentesIds = [
+      ...data.pendentesRecebidos.map((p) => p.amigo._id),
+      ...data.pendentesEnviados.map((p) => p.amigo._id),
+    ];
 
-    data.pendentes.forEach((p) => {
+    [...data.pendentesRecebidos, ...data.pendentesEnviados].forEach((p) => {
       const div = document.createElement("div");
 
       if (p.solicitadoPor.toString() === getUserId()) {

@@ -1,4 +1,5 @@
 // login.js
+import API_URL from "./url.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
@@ -10,8 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const senha = document.getElementById("password").value;
 
     try {
-      const API_URL = "https://wargorithm.onrender.com";
-    //  const API_URL = "http://localhost:5000"; // URL do seu servidor local
       const response = await fetch(`${API_URL}/api/usuarios/login`, {
         method: "POST",
         headers: {

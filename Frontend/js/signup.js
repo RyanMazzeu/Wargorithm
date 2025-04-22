@@ -1,4 +1,5 @@
 // signup.js
+import API_URL from "./url.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signup-form");
@@ -16,8 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const API_URL = "https://wargorithm.onrender.com";
-      //const API_URL = "http://localhost:5000";
       const response = await fetch(`${API_URL}/api/usuarios`, {
         method: "POST",
         headers: {
