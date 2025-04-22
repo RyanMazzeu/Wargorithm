@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-      const API_URL = "https://wargorithm.onrender.com";
-  //  const API_URL = "http://localhost:5000"; // URL do seu servidor local
+    //const API_URL = "https://wargorithm.onrender.com";
+    const API_URL = "http://localhost:5000"; // URL do seu servidor local
     const response = await authFetch(`${API_URL}/api/usuarios/perfil`, {
       method: "GET",
     });

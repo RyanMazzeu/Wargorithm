@@ -3,3 +3,88 @@
   height: 70px;
 }
 
+header.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vh 5vw;
+  gap: 20px;
+}
+
+h1 {
+  font-size: 3vh;
+  color: #2d3e24;
+}
+
+h2 {
+  margin-top: 3vh;
+  font-size: 2.5vh;
+  color: #3c5030;
+}
+
+input#search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: 2px solid #a3b49a;
+  border-radius: 8px;
+  outline: none;
+  margin-top: 10px;
+  background-color: #f5f8f1;
+}
+
+#search-results,
+#pending-invites,
+#friends-list {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+#search-results div,
+#pending-invites div,
+#friends-list div {
+  background-color: #c5cfb5;
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#search-results p,
+#pending-invites p,
+#friends-list p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #a4b594;
+  color: #000;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #8b997a;
+  transform: scale(1.05);
+}
+
+button.recusar {
+  background-color: #d48383;
+  color: white;
+}
+button.recusar:hover {
+  background-color: #a65353;
+}
