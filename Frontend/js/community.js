@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   async function carregarAmigosEPendentes() {
     const res = await authFetch(`${API_URL}/api/amigos/lista`);
     const data = await res.json();
-    console.log("Dados da API /lista:", data);
 
     const pendingDiv = document.getElementById("pending-invites");
     const friendsDiv = document.getElementById("friends-list");
@@ -71,7 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ...(data.pendentesEnviados || []).map((p) => p.amigo._id),
     ];
 
-    [...(data.pendentesRecebidos || []), ...(data.pendentesEnviados || [])].forEach((p) => {
+    [
+      ...(data.pendentesRecebidos || []),
+      ...(data.pendentesEnviados || []),
+    ].forEach((p) => {
       const div = document.createElement("div");
 
       if (p.solicitadoPor.toString() === getUserId()) {
@@ -84,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // convite recebido
         div.innerHTML = `
           <p><strong>${p.amigo.nome}</strong> te enviou um convite</p>
-          <button class="aceitar" data-id="${p.amigo._id}">Aceitar</button>
+          <button class="aceitar" data-id="${p.amigo._id}" style="margin: 0 10px;">Aceitar</button>
           <button class="recusar" data-id="${p.amigo._id}">Recusar</button>
         `;
       }

@@ -2,13 +2,21 @@
   width: 70px;
   height: 70px;
 }
+.logo {
+  flex: 1;
+}
 
+.navbar::after {
+  content: "";
+  flex: 1;
+}
 header.header {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2vh 5vw;
   gap: 20px;
+  padding-bottom: 100px;
 }
 
 h1 {
@@ -16,8 +24,7 @@ h1 {
   color: #2d3e24;
 }
 
-h2 {
-  margin-top: 3vh;
+h3 {
   font-size: 2.5vh;
   color: #3c5030;
 }
@@ -74,17 +81,25 @@ button {
   background-color: #a4b594;
   color: #000;
   transition: background-color 0.3s, transform 0.2s;
+
 }
 
 button:hover {
-  background-color: #8b997a;
+  background-color: #949f81;
   transform: scale(1.05);
 }
 
 button.recusar {
-  background-color: #d48383;
+  background-color: #dd6a6a;
   color: white;
 }
 button.recusar:hover {
+  background-color: #a65353;
+}
+button.cancelar {
+  background-color: #dd6a6a;
+  color: white;
+}
+button.cancelar:hover {
   background-color: #a65353;
 }
