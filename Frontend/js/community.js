@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_URL = "http://localhost:5000";
-  //const API_URL = "https://wargorithm.onrender.com";
+  //const API_URL = "http://localhost:5000";
+  const API_URL = "https://wargorithm.onrender.com";
   const input = document.getElementById("search-input");
 
   let amigosIds = [];
