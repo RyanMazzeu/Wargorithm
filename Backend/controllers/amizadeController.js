@@ -114,7 +114,8 @@ const listarAmigos = async (req, res) => {
 
   res.json({
     amigos,
-    pendentes: [...pendentesRecebidos, ...pendentesEnviados],
+    pendentesRecebidos,
+    pendentesEnviados,
   });
 };
 
