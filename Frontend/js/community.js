@@ -96,7 +96,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     data.amigos.forEach((f) => {
       const div = document.createElement("div");
-      div.innerHTML = `<p><strong>${f.amigo.nome}</strong> | Ranking: ${f.amigo.ranking}</p>`;
+      div.style.display = "flex";
+      div.style.justifyContent = "space-between";
+      div.style.alignItems = "center";
+
+      div.innerHTML = `
+        <p><strong>${f.amigo.nome}</strong> | Ranking: ${f.amigo.ranking}</p>
+        <div style="display: flex; gap: 10px;">
+          <button class="chat" data-id="${f.amigo._id}">Chat</button>
+          <button class="remove-friend" data-id="${f.amigo._id}">Remover</button>
+        </div>
+      `;
+
+      div
+        .querySelector(".remove-friend")
+        .addEventListener("click", async () => {
+          try {
+            const res = await authFetch(`${API_URL}/api/amigos/remover`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ idAmigo: f.amigo._id }),
+            });
+            const data = await res.json();
+            if (!res.ok)
+              throw new Error(data.message || "Erro ao remover amigo");
+
+            alert("Amigo removido!");
+            carregarAmigosEPendentes();
+          } catch (err) {
+            alert(`Erro: ${err.message}`);
+          }
+        });
       friendsDiv.appendChild(div);
     });
 

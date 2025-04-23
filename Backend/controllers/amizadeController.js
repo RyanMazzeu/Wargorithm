@@ -119,9 +119,35 @@ const listarAmigos = async (req, res) => {
   });
 };
 
+const removerAmigo = async (req, res) => {
+  const { idAmigo } = req.body;
+  const usuarioId = req.userId;
+
+  const usuario = await Usuario.findById(usuarioId);
+  const amigo = await Usuario.findById(idAmigo);
+
+  if (!usuario || !amigo)
+    return res.status(404).json({ message: "Usuário não encontrado." });
+
+  // Remove a amizade dos dois lados
+  usuario.amizades = usuario.amizades.filter(
+    (a) => a.amigo.toString() !== idAmigo
+  );
+  amigo.amizades = amigo.amizades.filter(
+    (a) => a.amigo.toString() !== usuarioId
+  );
+
+  await usuario.save();
+  await amigo.save();
+
+  res.json({ message: "Amizade removida com sucesso." });
+};
+
+
 module.exports = {
   buscarJogadores,
   enviarConvite,
   responderConvite,
   listarAmigos,
+  removerAmigo,
 };
