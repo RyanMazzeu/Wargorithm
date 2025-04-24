@@ -34,6 +34,7 @@ connectDB();
 // Rotas
 app.use("/api/usuarios", require("./routes/usuarios"));
 app.use("/api/amigos", require("./routes/amigos"));
+app.use("/api/chat", require("./routes/chat"));
 
 // Startando o servidor
 app.listen(port, "0.0.0.0", () => {
