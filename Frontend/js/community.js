@@ -34,6 +34,8 @@ let pendentesIds = [];
 
 // --- Event Listeners ---
 document.addEventListener("DOMContentLoaded", () => {
+
+
   closeChatBtn.addEventListener("click", () => {
     currentChatId = null;
     chatMessages.innerHTML = "";
@@ -115,7 +117,7 @@ async function carregarAmigosEPendentes() {
     } else {
       div.innerHTML = `
         <p><strong>${p.amigo.nome}</strong> te enviou um convite</p>
-        <button class="aceitar" data-id="${p.amigo._id}" style="margin: 0 10px;">Aceitar</button>
+        <button class="aceitar" data-id="${p.amigo._id}" style="margin: 0 10px 0 0;">Aceitar</button>
         <button class="recusar" data-id="${p.amigo._id}">Recusar</button>
       `;
     }

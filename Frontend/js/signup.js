@@ -1,9 +1,8 @@
 // signup.js
 import API_URL from "./url.js";
+const form = document.getElementById("signup-form");
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("signup-form");
-
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const nome = document.getElementById("name").value;

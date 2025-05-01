@@ -169,7 +169,6 @@ body {
     white-space: normal; /* <<< garante que pode quebrar a linha */
   }
 
-
   .navbar .logo {
     margin-left: 5vw;
   }

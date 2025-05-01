@@ -1,9 +1,8 @@
 // login.js
 import API_URL from "./url.js";
+const form = document.querySelector("form");
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 

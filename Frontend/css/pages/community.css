@@ -26,6 +26,15 @@
   padding: 10px;
   overflow-y: auto;
 }
+ 
+#chat-container {
+  display: none;
+}
+@media (orientation: portrait) {
+  #chat-container {
+    margin-bottom: 100px;
+  }
+}
 
 #chat-input {
   border: none;
