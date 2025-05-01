@@ -182,14 +182,13 @@
     align-items: center; /* Alinha o conteúdo verticalmente ao centro */
     justify-content: center; /* Alinha o conteúdo horizontalmente ao centro */
     align-self: center;
-    width: 80%; /* Define a largura do botão */
+    width: 150px; /* Define a largura do botão */
     height: 60px; /* Define a altura do botão */
     font-size: 20px; /* Define o tamanho da fonte */
     font-family: "Roboto", sans-serif;
     font-weight: medium;
     padding: 0; /* Remove o espaçamento interno */
     min-width: max-content; /* Faz o botão ser no mínimo do tamanho do texto */
-    max-width: 50%;
     cursor: pointer;
     border-radius: 10px;
     background-color: #333333; /* Cor de fundo */
