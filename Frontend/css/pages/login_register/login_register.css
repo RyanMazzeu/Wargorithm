@@ -1,3 +1,13 @@
+/* ------------ Body ------------ */
+body {
+  background-color: #d4dcc7;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  font-family: "Arial";
+}
+
 /* ------------ Container Section ------------ */
 .container {
   display: flex;
@@ -35,8 +45,7 @@
 /* ------------ Right Side --------------- */
 
 .right-side {
-  margin: auto auto;
-
+  margin: 5px auto;
   transform: translateX(-100%);
   animation: slide-in 0.8s ease-out forwards;
   width: 100%;
@@ -89,19 +98,18 @@
         outline: none;
         caret-color: white;
       }
+      label {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: gray;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+      }
     }
-
-    .input-container label {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 30px;
-      color: gray;
-      transition: all 0.3s ease-in-out;
-      pointer-events: none;
-    }
-    .input-container input:focus + label,
+    .input-container .input-container input:focus + label,
     .input-container input:not(:placeholder-shown) + label {
       top: 0;
       font-size: 20px;
@@ -114,22 +122,20 @@
       transform: translateY(-50%);
       text-decoration: none;
       font-size: 30px;
-      color: #ff00e0; /* Altere a cor conforme sua preferência */
+      color: #ff00e0; 
       font-weight: semi-bold;
     }
     .input-container .forgot-password:hover {
       color: #ff00e15f; /* Altere a cor conforme sua preferência */
     }
-
     .input-container input:not(:placeholder-shown) ~ .forgot-password {
       display: none;
     }
 
-    /* ------------ Seção "Or" ------------ */
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 400px; /* Estilos para os inputs do formulário */
+    max-width: 400px;
     input[type="text"],
     input[type="email"],
     input[type="password"] {
@@ -160,7 +166,6 @@
       margin: 0 auto;
     }
     button[type="submit"]:hover {
-      transform: scale(0.98);
       background: linear-gradient(to right, #3d4c62, #6984a9);
     }
     button[type="submit"]:active {
@@ -206,8 +211,6 @@
   }
 
   .google-signin:hover {
-    transform: scale(0.98);
-
     background: linear-gradient(
       to right,
       #333333,
@@ -253,7 +256,6 @@
   /* ------------ Footer Info ------------ */
   .footer-info .copyright {
     margin: 0;
-    margin-bottom: 0px;
     font-size: 15px;
     justify-self: center;
   }

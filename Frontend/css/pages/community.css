@@ -1,15 +1,21 @@
+.bottom-nav a:nth-child(3) img {
+  width: 70px;
+  height: 70px;
+}
+
+
+
 #chat-container {
   position: fixed;
   right: 0;
   bottom: 0;
   width: 300px;
-  height: 400px;
+  height: 300px;
   background-color: white;
   border-left: 1px solid #ccc;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  z-index: 999;
 }
 
 #chat-header {
@@ -26,7 +32,7 @@
   padding: 10px;
   overflow-y: auto;
 }
- 
+
 #chat-container {
   display: none;
 }
@@ -48,29 +54,14 @@
   display: none;
 }
 
-.bottom-nav a:nth-child(3) img {
-  width: 70px;
-  height: 70px;
-}
 .logo {
   flex: 1;
 }
-@media (max-width: 440px) {
-  .logo {
-    display: none;
-  }
-}
-.navbar::after {
-  content: "";
-  flex: 1;
-}
+
 header.header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2vh 5vw;
-  gap: 20px;
-  padding-bottom: 100px;
 }
 
 h1 {
@@ -124,35 +115,36 @@ input#search-input {
   margin: 0;
   font-size: 1.1rem;
 }
+.header {
+  button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #a4b594;
+    color: #000;
+    transition: background-color 0.3s, transform 0.2s;
+  }
 
-button {
-  padding: 8px 16px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  background-color: #a4b594;
-  color: #000;
-  transition: background-color 0.3s, transform 0.2s;
-}
+  button:hover {
+    background-color: #949f81;
+    transform: scale(1.05);
+  }
 
-button:hover {
-  background-color: #949f81;
-  transform: scale(1.05);
-}
-
-button.recusar {
-  background-color: #dd6a6a;
-  color: white;
-}
-button.recusar:hover {
-  background-color: #a65353;
-}
-button.cancelar {
-  background-color: #dd6a6a;
-  color: white;
-}
-button.cancelar:hover {
-  background-color: #a65353;
+  button.recusar {
+    background-color: #dd6a6a;
+    color: white;
+  }
+  button.recusar:hover {
+    background-color: #a65353;
+  }
+  button.cancelar {
+    background-color: #dd6a6a;
+    color: white;
+  }
+  button.cancelar:hover {
+    background-color: #a65353;
+  }
 }

@@ -7,10 +7,11 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const port = process.env.PORT;
 const allowedOrigins = [
-  "https://wargorithm.vercel.app", // seu frontend Vercel
-  "http://localhost:5000", // caso teste local
+  "https://wargorithm.vercel.app",
+  "http://localhost:5000",
   "http://127.0.0.1:5500",
-  undefined, // ← ESSENCIAL pro Postman/cURL
+  "192.168.1.8:5500",
+  undefined, 
 ];
 
 app.use(

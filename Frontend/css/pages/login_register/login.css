@@ -1,0 +1,5 @@
+@media (max-height: 710px) {
+  .right-side {
+    justify-content: flex-start;
+  }
+}
