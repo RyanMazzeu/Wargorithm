@@ -26,8 +26,13 @@ body {
 }
 
 /* Elementos padrão */
-.desktop {
-  display: none;
+@media (orientation: portrait) {
+  .mobile {
+    display: flex;
+  }
+  .desktop {
+    display: none;
+  }
 }
 
 /* VERSÃO DESKTOP \/ */

@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/components/navbar.css">
   <link rel="stylesheet" href="../css/components/global.css">
 
-  <link rel="stylesheet" href="../css/components/navbar.css">
   <link rel="stylesheet" href="../css/pages/home.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -20,41 +20,26 @@
 </head>
 
 <body>
-  <nav class="navbar">
+
+  <header class="mobile">
     <div class="logo">
       <img src="../assets/img/Only_Logo.svg" alt="Logo Wargorithm">
     </div>
     <h2 class="mobile">HOME</h2>
     <img src="../assets/img/bell.svg" alt="Notificações" class="notification-icon mobile">
+  </header>
 
-    <div class="bottom-nav">
-      <a href="#" class="active">
-        <img class="mobile" src="../assets/img/home.svg" alt="Home">
-        <p class="desktop">Home</p>
-      </a>
-      <a href="../pages/profile.html">
-        <img class="mobile" src="../assets/img/profile.svg" alt="Profile">
-        <p class="desktop">Profile</p>
-      </a>
-      <a href="../pages/community.html">
-        <img class="mobile" src="../assets/img/community.svg" alt="Community">
-        <p class="desktop">Community</p>
-      </a>
-      <a href="../pages/ranking.html">
-        <img class="mobile" src="../assets/img/Ranking.svg" alt="Ranking">
-        <p class="desktop">Ranking</p>
-      </a>
-      <button id="logout-button" alt="Leave" class="desktop">Leave</button>
-    </div>
-  </nav>
-  <header class="header">
-    <div class="header-image">
+
+  <main class="main">
+    <header class="header-image">
       <img src="../assets/img/Home_Image_mobile.svg" alt="Jogadores em competição">
-    </div>
-
-    <div class="mobile">
-      <p> Desafie sua lógica e conquiste seu lugar no ranking. A comunidade de programadores te espera!</p>
-      <p> Teste </p>
+    </header>
+    <section class="header-text">
+      <p>Desafie sua lógica e conquiste seu lugar no ranking. A comunidade de programadores te espera!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad repellat blanditiis saepe nihil consequatur vero et facere non consectetur. Architecto libero recusandae sint voluptates at blanditiis temporibus nostrum quasi id.</p>
+      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias ipsum, voluptatum ex consectetur rerum repudiandae enim. Consequatur laborum deserunt iusto quasi voluptates, fugiat corporis inventore explicabo sapiente, nisi aperiam cumque. </p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis voluptates, blanditiis, reprehenderit numquam placeat molestiae provident nemo dolor quas et nihil mollitia. Soluta eius, eligendi minus dolorem voluptatem odit in! </p>
+      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quos ex fugit? Sunt incidunt atque dolore doloremque ipsa asperiores eaque temporibus debitis porro dolor possimus nulla quo magni, laudantium blanditiis. </p>
       <p> Teste </p>
       <p> Teste </p>
       <p> Teste </p>
@@ -79,17 +64,40 @@
       <p> Teste </p>
       <p> Teste </p>
       <p> Teste1 </p>
+    </section>
 
-    </div>
-
-    <div class="header-text desktop">
+    <div class="desktop">
       <h1>Mostre sua lógica.<br>Vença o desafio!</h1>
       <p>Wargorithm é um jogo competitivo de programação onde 8 jogadores disputam para resolver desafios primeiro. Suba no ranking e prove suas habilidades!</p>
       <a href="#" class="play-button desktop">Jogar Agora</a>
       <p class="subtext desktop">Milhares de programadores já aceitaram o desafio. Você está pronto?</p>
     </div>
 
-  </header>
+  </main>
+
+
+  <nav class="bottom-nav">
+
+    <a href="#" class="active">
+      <img class="mobile" src="../assets/img/home.svg" alt="Home">
+      <p class="desktop active">Home</p>
+    </a>
+    <a href="../pages/profile.html">
+      <img class="mobile" src="../assets/img/profile.svg" alt="Profile">
+      <p class="desktop">Profile</p>
+    </a>
+    <a href="../pages/community.html">
+      <img class="mobile" src="../assets/img/community.svg" alt="Community">
+      <p class="desktop">Community</p>
+    </a>
+    <a href="../pages/ranking.html">
+      <img class="mobile" src="../assets/img/Ranking.svg" alt="Ranking">
+      <p class="desktop">Ranking</p>
+    </a>
+    <img src="../assets/img/Only_Logo.svg" alt="Logo Wargorithm" id="logo" class="desktop">
+    <button id="logout-button" alt="Leave" class="desktop">Leave</button>
+  </nav>
+
   <script src="../js/home.js"></script>
 
 </body>

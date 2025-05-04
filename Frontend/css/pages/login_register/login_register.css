@@ -1,37 +1,27 @@
 /* ------------ Body ------------ */
 body {
   background-color: #d4dcc7;
-  margin: 0;
-  height: 100vh;
   display: flex;
-  overflow: hidden;
   font-family: "Arial";
-}
-
-/* ------------ Container Section ------------ */
-.container {
-  display: flex;
-  width: 100%;
   height: 100vh;
-  overflow: auto;
-  flex-direction: column;
-  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
 }
 
 /* ------------ Left Side --------------- */
 @media (orientation: landscape) {
   .left-side {
-    transform: scale(0.5);
-    opacity: 0;
+    align-items: center;
     animation: expand-and-fade-in 0.8s ease-out forwards;
-    height: 100vh;
     display: flex;
-    width: 70%;
+    height: 100vh;
+    justify-content: center;
+    opacity: 0;
+    order: 1;
     overflow: hidden;
     position: fixed; /* Alternativa: use sticky com top:0 */
-    align-items: center;
-    justify-content: center;
-    order: 1;
+    transform: scale(0.5);
+    width: 70%;
     #Imagem_Login {
       width: 100%;
     }
@@ -45,17 +35,16 @@ body {
 /* ------------ Right Side --------------- */
 
 .right-side {
-  margin: 5px auto;
-  transform: translateX(-100%);
-  animation: slide-in 0.8s ease-out forwards;
+  margin: 0 auto;
   width: 100%;
-  flex-grow: 1;
+  animation: slide-in 0.8s ease-out forwards;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   padding: 0;
+  overflow-y: auto;
 
   #Logo_Line {
     display: flex;
@@ -75,6 +64,10 @@ body {
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
     /* ------------ Input Container ------------ */
     .input-container {
       max-width: 350px;
@@ -92,12 +85,44 @@ body {
         outline: none;
         background: transparent;
         transition: border-color 0.3s ease-in-out;
+        &:focus {
+          border-bottom: 2px solid white; /* Linha branca ao focar */
+          outline: none;
+          caret-color: white;
+        }
+        &:focus + label,
+        &:not(:placeholder-shown) + label {
+          top: 0;
+          font-size: 20px;
+          color: black;
+        }
+        &:not(:placeholder-shown) ~ .forgot-password {
+          display: none;
+        }
       }
-      input:focus {
-        border-bottom: 2px solid white; /* Linha branca ao focar */
-        outline: none;
-        caret-color: white;
+
+      .forgot-password {
+        border: none;
+        background: transparent;
+
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        text-decoration: none;
+        font-size: 30px;
+        color: #ff00e0;
+        font-weight: semi-bold;
+        margin: -15px auto;
+        &:hover {
+          cursor: pointer;
+          color: #ff00e15f; /* Altere a cor conforme sua preferência */
+        }
+        &:active {
+          transform: scale(0.98);
+          color: #ff00e1a1; /* Altere a cor conforme sua preferência */
+        }
       }
+
       label {
         position: absolute;
         left: 1rem;
@@ -109,33 +134,8 @@ body {
         pointer-events: none;
       }
     }
-    .input-container .input-container input:focus + label,
-    .input-container input:not(:placeholder-shown) + label {
-      top: 0;
-      font-size: 20px;
-      color: black;
-    }
-    .input-container .forgot-password {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      text-decoration: none;
-      font-size: 30px;
-      color: #ff00e0; 
-      font-weight: semi-bold;
-    }
-    .input-container .forgot-password:hover {
-      color: #ff00e15f; /* Altere a cor conforme sua preferência */
-    }
-    .input-container input:not(:placeholder-shown) ~ .forgot-password {
-      display: none;
-    }
 
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
+   
     input[type="text"],
     input[type="email"],
     input[type="password"] {
@@ -200,33 +200,29 @@ body {
     color: white; /* Cor do texto */
     border: none;
     margin: 0;
+    img {
+      display: block;
+      margin: 0;
+      margin-right: 5px;
+      height: 30px;
+      width: 30px;
+    }
+    &:hover {
+      background: linear-gradient(
+        to right,
+        #333333,
+        #616161
+      ); /* Degradê horizontal - Cor ao passar o mouse */
+    }
+    &:active {
+      transform: scale(0.98);
+      background: linear-gradient(
+        to right,
+        #4e4e4e,
+        #8d8b8b
+      ); /* Degradê horizontal - Cor ao passar o mouse */
+    }
   }
-
-  .google-signin img {
-    display: block;
-    margin: 0;
-    margin-right: 5px;
-    height: 30px;
-    width: 30px;
-  }
-
-  .google-signin:hover {
-    background: linear-gradient(
-      to right,
-      #333333,
-      #616161
-    ); /* Degradê horizontal - Cor ao passar o mouse */
-  }
-
-  .google-signin:active {
-    transform: scale(0.98);
-    background: linear-gradient(
-      to right,
-      #4e4e4e,
-      #8d8b8b
-    ); /* Degradê horizontal - Cor ao passar o mouse */
-  }
-
   /* ------------ Account Prompt ------------ */
   .account-prompt {
     display: flex;
@@ -242,14 +238,17 @@ body {
       margin: 0 auto;
     }
     .pink-link {
+      cursor: pointer;
+      border: none;
+      background: transparent;
       margin-left: 5px;
       color: #ff00e0;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
-    }
-    .pink-link:hover {
-      color: #f291d7;
+      &:hover {
+        color: #f291d7;
+      }
     }
   }
 
@@ -270,18 +269,9 @@ body {
 }
 
 @media (orientation: landscape) {
-  .container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-  }
-
   .right-side {
-    margin-left: 70%; /* Ajusta o espaço para a coluna fixa */
-
+    margin-left: 70%;
     width: 30%;
-    overflow-y: auto;
     flex-grow: 1;
     order: 2;
   }
