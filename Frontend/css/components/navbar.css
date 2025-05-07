@@ -1,4 +1,4 @@
-.bottom-nav {
+nav {
   position: fixed;
   right: 0;
   display: flex;
@@ -6,19 +6,46 @@
 }
 
 @media (orientation: portrait) {
+  header {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    #logo {
+      width: 60px;
+      height: 60px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    h1 {
+      margin: 0 auto;
+      font-size: 50px;
+      text-align: center;
+      color: #000000;
+      font-family: "Orbitron", sans-serif;
+    }
+    img {
+      width: 60px;
+      height: 30px;
+    }
+  }
+
   .navbar {
     justify-content: space-between;
     padding: 10px 20px;
     height: 90px;
   }
 
-  .bottom-nav {
+  nav {
     bottom: 0;
     left: 0;
     height: 100px;
     background-color: #949f81;
     justify-content: space-evenly;
     z-index: 100;
+
     a.active {
       background-color: #000000;
       border: 5px solid rgb(255, 255, 255);
@@ -30,7 +57,7 @@
 }
 
 @media (orientation: landscape) {
-  .bottom-nav {
+  nav {
     background-color: #c5cfb5;
     height: 100px;
     width: 100%;

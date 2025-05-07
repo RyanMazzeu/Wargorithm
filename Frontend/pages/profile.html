@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../css/components/navbar.css">
   <link rel="stylesheet" href="../css/components/global.css">
+  <link rel="stylesheet" href="../css/components/navbar.css">
   <link rel="stylesheet" href="../css/pages/profile.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -21,69 +21,79 @@
 </head>
 
 <body>
+
   <header class="mobile">
-    <div class="logo">
+    <div id="logo">
       <img src="../assets/img/Only_Logo.svg" alt="Logo Wargorithm">
     </div>
-    <h2 class="mobile">PROFILE</h2>
-    <img src="../assets/img/bell.svg" alt="Notificações" class="notification-icon mobile">
+    <h1>PROFILE</h1>
   </header>
 
-  <main class="main">
-    <div class="profile-container">
-      <div class="profile-card">
-        <div class="profile-header">
-          <img src="../assets/img/profilepicture.svg" alt="Profile Picture" class="profile-picture">
+  <main>
+    <header class="profile-header">
+      <img src="../assets/img/profilepicture.svg" alt="Profile Picture">
+    </header>
+
+    <dl class="profile-details">
+      <div class="detail-pair">
+        <dt>
+          <img src="../assets/img/profile-icons/Name.svg" alt="User Icon" class="detail-icon" />
+        </dt>
+        <div>
+          <strong>Name</strong>
+          <dd></dd>
         </div>
-        <div class="profile-details">
-          <div class="detail-pair">
-            <img src="../assets/img/profile-icons/Name.svg" alt="User Icon" class="detail-icon" />
-            <div>
-              <p><strong>Name</strong></p>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="detail-pair">
-            <img src="../assets/img/profile-icons/Ranking.svg" alt="Trophy Icon" class="detail-icon" />
-            <div>
-              <p><strong>Ranking</strong></p>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="detail-pair">
-            <img src="../assets/img/profile-icons/Victories.svg" alt="Swords Icon" class="detail-icon" />
-            <div>
-              <p><strong>Victories</strong></p>
-              <p></p>
-            </div>
-          </div>
-
-          <div class="detail-pair">
-            <img src="../assets/img/profile-icons/Email.svg" alt="Email Icon" class="detail-icon" />
-            <div>
-              <p><strong>E-Mail</strong></p>
-              <p></p>
-            </div>
-          </div>
-
-        </div>
-        <button id="leave-button" alt="Leave" class="mobile">
-          <img src="../assets/img/Logout.svg" alt="Log Out Icon">
-          Log Out
-        </button>
       </div>
-    </div>
 
-    </div>
+      <div class="detail-pair">
+        <dt>
+          <img src="../assets/img/profile-icons/Ranking.svg" alt="Trophy Icon" class="detail-icon" />
+        </dt>
+        <div>
+          <strong>Ranking</strong>
+          <dd></dd>
+        </div>
+      </div>
 
+
+      <div class="detail-pair">
+        <dt>
+          <img src="../assets/img/profile-icons/Victories.svg" alt="Swords Icon" class="detail-icon" />
+        </dt>
+        <div>
+          <strong>Victories</strong>
+          <dd></dd>
+        </div>
+      </div>
+
+      <div class="detail-pair">
+        <dt>
+          <img src="../assets/img/profile-icons/Email.svg" alt="Email Icon" class="detail-icon" />
+
+        </dt>
+        <div>
+          <strong>E-Mail</strong>
+          <dd></dd>
+        </div>
+
+      </div>
+    </dl>
+
+
+
+    <footer>
+      <button id="leave-button" class="mobile">
+        <img src="../assets/img/Logout.svg" alt="Log Out Icon">
+        <span>Log Out</span>
+      </button>
+    </footer>
   </main>
 
-  <nav class="bottom-nav">
+
+  <nav>
     <a href="../pages/home.html">
       <img class="mobile" src="../assets/img/home.svg" alt="Home">
-      <p class="desktop ">Home</p>
+      <p class="desktop">Home</p>
     </a>
     <a href="#" class="active">
       <img class="mobile" src="../assets/img/profile.svg" alt="Profile">

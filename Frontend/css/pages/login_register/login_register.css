@@ -55,12 +55,12 @@ body {
     }
   }
 
-  h2.mobile-text {
-    margin: 0 auto 15px auto; /* centraliza o próprio h2 */
+  h2 {
+    margin: 0 auto 15px auto;
     font-family: "Roboto", sans-serif;
     font-size: 2.4rem;
-    text-align: center; /* centraliza o texto em múltiplas linhas */
-    display: block; /* garante que seja um bloco centralizável */
+    text-align: center;
+    display: block;
   }
 
   form {
@@ -99,12 +99,23 @@ body {
         &:not(:placeholder-shown) ~ .forgot-password {
           display: none;
         }
+
+        &[type="text"],
+        &[type="email"],
+        &[type="password"] {
+          font-family: "Roboto", sans-serif;
+          width: 100%;
+          color: #000000;
+          border-radius: 5px;
+          max-width: 100%;
+          box-sizing: border-box;
+          font-size: 25px;
+        }
       }
 
       .forgot-password {
         border: none;
         background: transparent;
-
         position: absolute;
         right: 10px;
         top: 50%;
@@ -135,19 +146,6 @@ body {
       }
     }
 
-   
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      font-family: "Roboto", sans-serif;
-      width: 100%;
-      color: #000000;
-      border-radius: 5px;
-      max-width: 100%;
-      box-sizing: border-box;
-      font-size: 25px;
-    }
-
     button[type="submit"] {
       width: 100%; /* Define a largura do botão */
       height: 60px; /* Define a altura do botão */
@@ -164,90 +162,90 @@ body {
       cursor: pointer;
       transition: background 0.3s ease;
       margin: 0 auto;
-    }
-    button[type="submit"]:hover {
-      background: linear-gradient(to right, #3d4c62, #6984a9);
-    }
-    button[type="submit"]:active {
-      transform: scale(0.98);
-      background: linear-gradient(to right, rgb(76, 94, 120), #7991b3);
-    }
-  }
-  .or {
-    font-family: "Roboto", sans-serif;
-    font-weight: Regular;
-    font-size: 30px;
-    color: #000000;
-    text-align: center;
-    margin: 10px;
-  }
-  /* ------------ Botão Google Signin ------------ */
-  .google-signin {
-    display: flex;
-    align-items: center; /* Alinha o conteúdo verticalmente ao centro */
-    justify-content: center; /* Alinha o conteúdo horizontalmente ao centro */
-    align-self: center;
-    width: 150px; /* Define a largura do botão */
-    height: 60px; /* Define a altura do botão */
-    font-size: 20px; /* Define o tamanho da fonte */
-    font-family: "Roboto", sans-serif;
-    font-weight: medium;
-    padding: 0; /* Remove o espaçamento interno */
-    min-width: max-content; /* Faz o botão ser no mínimo do tamanho do texto */
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: #333333; /* Cor de fundo */
-    color: white; /* Cor do texto */
-    border: none;
-    margin: 0;
-    img {
-      display: block;
-      margin: 0;
-      margin-right: 5px;
-      height: 30px;
-      width: 30px;
-    }
-    &:hover {
-      background: linear-gradient(
-        to right,
-        #333333,
-        #616161
-      ); /* Degradê horizontal - Cor ao passar o mouse */
-    }
-    &:active {
-      transform: scale(0.98);
-      background: linear-gradient(
-        to right,
-        #4e4e4e,
-        #8d8b8b
-      ); /* Degradê horizontal - Cor ao passar o mouse */
-    }
-  }
-  /* ------------ Account Prompt ------------ */
-  .account-prompt {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    p {
-      margin-top: 5px;
-      width: 100%;
-      font-size: 20px;
-      font-family: "Roboto", sans-serif;
-      color: #000000;
-      margin: 0 auto;
-    }
-    .pink-link {
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      margin-left: 5px;
-      color: #ff00e0;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
       &:hover {
-        color: #f291d7;
+        background: linear-gradient(to right, #3d4c62, #6984a9);
+      }
+      &:active {
+        transform: scale(0.98);
+        background: linear-gradient(to right, rgb(76, 94, 120), #7991b3);
+      }
+    }
+    .or {
+      font-family: "Roboto", sans-serif;
+      font-weight: Regular;
+      font-size: 30px;
+      color: #000000;
+      text-align: center;
+      margin: 10px;
+    }
+    /* ------------ Botão Google Signin ------------ */
+    .google-signin {
+      display: flex;
+      align-items: center; /* Alinha o conteúdo verticalmente ao centro */
+      justify-content: center; /* Alinha o conteúdo horizontalmente ao centro */
+      align-self: center;
+      width: 150px; /* Define a largura do botão */
+      height: 60px; /* Define a altura do botão */
+      font-size: 20px; /* Define o tamanho da fonte */
+      font-family: "Roboto", sans-serif;
+      font-weight: medium;
+      padding: 0; /* Remove o espaçamento interno */
+      min-width: max-content; /* Faz o botão ser no mínimo do tamanho do texto */
+      cursor: pointer;
+      border-radius: 10px;
+      background-color: #333333; /* Cor de fundo */
+      color: white; /* Cor do texto */
+      border: none;
+      margin: 0;
+      img {
+        display: block;
+        margin: 0;
+        margin-right: 5px;
+        height: 30px;
+        width: 30px;
+      }
+      &:hover {
+        background: linear-gradient(
+          to right,
+          #333333,
+          #616161
+        ); /* Degradê horizontal - Cor ao passar o mouse */
+      }
+      &:active {
+        transform: scale(0.98);
+        background: linear-gradient(
+          to right,
+          #4e4e4e,
+          #8d8b8b
+        ); /* Degradê horizontal - Cor ao passar o mouse */
+      }
+    }
+    /* ------------ Account Prompt ------------ */
+    .account-prompt {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      p {
+        margin-top: 5px;
+        width: 100%;
+        font-size: 20px;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+        margin: 0 auto;
+      }
+      .pink-link {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        margin-left: 5px;
+        color: #ff00e0;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        &:hover {
+          color: #f291d7;
+        }
       }
     }
   }

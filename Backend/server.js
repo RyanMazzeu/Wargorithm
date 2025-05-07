@@ -10,8 +10,8 @@ const allowedOrigins = [
   "https://wargorithm.vercel.app",
   "http://localhost:5000",
   "http://127.0.0.1:5500",
-  "192.168.1.8:5500",
-  undefined, 
+  "http://192.168.1.8:5500",
+  undefined,
 ];
 
 app.use(

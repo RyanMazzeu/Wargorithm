@@ -1,48 +1,107 @@
 @media (orientation: portrait) {
-  .bottom-nav a:nth-child(1) img {
+  nav a:nth-child(1) img {
     width: 70px;
     height: 70px;
   }
-
-  header {
-    padding: 0 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .logo {
-      width: 60px;
-      height: 60px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .notification-icon {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
+  #notification-icon {
+    cursor: pointer;
   }
-
-  .main {
+  main {
     display: block;
     max-height: calc(100vh - 162.4px);
     overflow-y: auto;
-    header{
-      display: flex;
-      flex-direction: column;  
-    }
-    section{
+    header {
       display: flex;
       flex-direction: column;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    section {
+      flex-direction: column;
       align-items: center;
-      justify-content: flex-start; 
-            margin: 0 10px;
+      justify-content: flex-start;
+      margin: 0 10px;
     }
   }
-
 }
 
 @media (orientation: landscape) {
-  
+  main {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+
+    header {
+      order: 2;
+      width: 50%;
+      height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        margin: auto auto;
+        width: 80%;
+        object-fit: cover;
+      }
+    }
+    section {
+      order: 1;
+      width: 50%;
+      margin: auto;
+      h2 {
+        margin: 0 auto;
+        font-size: 50px;
+        text-align: center;
+        color: #000000;
+        font-family: "Roboto";
+        margin-bottom: 25px;
+      }
+      p {
+        font-family: "Roboto";
+        font-size: 18px;
+        max-width: 500px;
+        text-align: justify;
+        align-self: center;
+        margin: 0 auto;
+        line-height: 1.6;
+        word-spacing: 0.1em;
+        letter-spacing: 0.05em;
+        padding: 0 20px;
+      }
+
+      #play-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        max-width: 450px;
+        align-items: center;
+        margin: 20px auto;
+        padding: 10px 40px;
+        button {
+          font-family: "Roboto";
+          font-size: 16px;
+          margin: 0 auto;
+          padding: 10px 30px;
+          background-color: #000;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          &:active {
+            transform: scale(0.9);
+          }
+        }
+        aside {
+          margin-left: 10px;
+          max-width: 150px;
+          color: #808080;
+          font-style: italic;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }

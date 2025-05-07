@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/pages/home.css">
   <link rel="stylesheet" href="../css/components/navbar.css">
   <link rel="stylesheet" href="../css/components/global.css">
-
-  <link rel="stylesheet" href="../css/pages/home.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -22,19 +21,19 @@
 <body>
 
   <header class="mobile">
-    <div class="logo">
+    <div id="logo">
       <img src="../assets/img/Only_Logo.svg" alt="Logo Wargorithm">
     </div>
-    <h2 class="mobile">HOME</h2>
-    <img src="../assets/img/bell.svg" alt="Notificações" class="notification-icon mobile">
+    <h1>HOME</h1>
+    <img src="../assets/img/bell.svg" alt="Notificações" id="notification-icon">
   </header>
 
-
-  <main class="main">
-    <header class="header-image">
-      <img src="../assets/img/Home_Image_mobile.svg" alt="Jogadores em competição">
+  <main>
+    <header>
+      <img src="../assets/img/Home_Image.svg" alt="Jogadores em competição">
     </header>
-    <section class="header-text">
+
+    <section class="mobile">
       <p>Desafie sua lógica e conquiste seu lugar no ranking. A comunidade de programadores te espera!</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad repellat blanditiis saepe nihil consequatur vero et facere non consectetur. Architecto libero recusandae sint voluptates at blanditiis temporibus nostrum quasi id.</p>
       <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias ipsum, voluptatum ex consectetur rerum repudiandae enim. Consequatur laborum deserunt iusto quasi voluptates, fugiat corporis inventore explicabo sapiente, nisi aperiam cumque. </p>
@@ -63,21 +62,22 @@
       <p> Teste </p>
       <p> Teste </p>
       <p> Teste </p>
-      <p> Teste1 </p>
+      <p> Ultima Linha! </p>
     </section>
 
-    <div class="desktop">
-      <h1>Mostre sua lógica.<br>Vença o desafio!</h1>
+    <section class="desktop">
+      <h2>Mostre sua lógica.<br>Vença o desafio!</h2>
       <p>Wargorithm é um jogo competitivo de programação onde 8 jogadores disputam para resolver desafios primeiro. Suba no ranking e prove suas habilidades!</p>
-      <a href="#" class="play-button desktop">Jogar Agora</a>
-      <p class="subtext desktop">Milhares de programadores já aceitaram o desafio. Você está pronto?</p>
-    </div>
 
+      <div id="play-button">
+        <button href="#">Jogar Agora</button>
+        <aside>Milhares de programadores já aceitaram o desafio. Você está pronto?</aside>
+      </div>
+
+    </section>
   </main>
 
-
-  <nav class="bottom-nav">
-
+  <nav>
     <a href="#" class="active">
       <img class="mobile" src="../assets/img/home.svg" alt="Home">
       <p class="desktop active">Home</p>
@@ -99,7 +99,6 @@
   </nav>
 
   <script src="../js/home.js"></script>
-
 </body>
 
 </html>
