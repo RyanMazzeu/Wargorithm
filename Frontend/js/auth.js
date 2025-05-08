@@ -1,5 +1,4 @@
 // Frontend/js/auth.js
-
 function authFetch(url, options = {}) {
   const token = localStorage.getItem("token");
   options.headers = {
@@ -8,19 +7,20 @@ function authFetch(url, options = {}) {
   };
   return fetch(url, options);
 }
-document.addEventListener("DOMContentLoaded", async () => {
-  // 2. Logout
-  document.getElementById("logout-button").addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    window.location.href = "../index.html";
-  });
 
-  // 1. Verificação inicial do token
-  window.addEventListener("pageshow", function (event) {
-    const token = localStorage.getItem("token");
-    if (!token) {
+document.addEventListener("DOMContentLoaded", () => {
+  // Proteção de rota
+  if (!localStorage.getItem("token")) {
+    window.location.href = "../index.html";
+  }
+
+  // Logout
+  const logoutBtn = document.getElementById("logout-button");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("token");
       window.location.href = "../index.html";
-    }
-  });
+    });
+  }
 });

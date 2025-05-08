@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-    const response = await authFetch(`${API_URL}/api/usuarios/perfil`, {
+    const response = await authFetch(`${API_URL}/api/perfil`, {
       method: "GET",
     });
 
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const usuario = await response.json();
 
-    nameField.textContent = usuario.nome;
+    nameField.textContent = usuario.name;
     rankingField.textContent = usuario.ranking;
-    victoriesField.textContent = usuario.vitorias;
+    victoriesField.textContent = usuario.victories;
     emailField.textContent = usuario.email;
   } catch (error) {
     console.error(error);
