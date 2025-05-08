@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum MatchStatus {
+  WAITING
+  IN_PROGRESS
+  FINISHED
+}
+
+enum Language {
+  C
+  CPP
+  JAVA
+  PYTHON
+  JAVASCRIPT
+  RUBY
+  CSHARP
+}
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  password        String
+  ranking         Int              @default(0)
+  victories       Int              @default(0)
+  photo           String?
+  createdAt       DateTime         @default(now())
+
+  sentRequests    FriendRequest[]  @relation("SentRequests")
+  receivedRequests FriendRequest[] @relation("ReceivedRequests")
+
+  friendshipsA    Friendship[]     @relation("FriendshipsA")
+  friendshipsB    Friendship[]     @relation("FriendshipsB")
+  messagesSent    Message[]        @relation("MessagesSent")
+  playerMatches   PlayerMatch[]
+}
+
+model FriendRequest {
+  id        Int                  @id @default(autoincrement())
+  senderId  Int
+  receiverId Int
+  status    FriendRequestStatus
+  createdAt DateTime             @default(now())
+
+  sender    User                 @relation("SentRequests", fields: [senderId], references: [id])
+  receiver  User                 @relation("ReceivedRequests", fields: [receiverId], references: [id])
+}
+
+model Friendship {
+  id        Int       @id @default(autoincrement())
+  userAId   Int
+  userBId   Int
+  createdAt DateTime  @default(now())
+
+  userA     User      @relation("FriendshipsA", fields: [userAId], references: [id])
+  userB     User      @relation("FriendshipsB", fields: [userBId], references: [id])
+
+  messages  Message[]
+  @@unique([userAId, userBId])
+}
+
+model Message {
+  id            Int       @id @default(autoincrement())
+  friendshipId  Int
+  senderId      Int
+  content       String
+  createdAt     DateTime  @default(now())
+
+  friendship    Friendship @relation(fields: [friendshipId], references: [id])
+  sender        User       @relation("MessagesSent", fields: [senderId], references: [id])
+}
+
+model Match {
+  id               Int               @id @default(autoincrement())
+  status           MatchStatus      @default(WAITING)
+  startedAt        DateTime?
+  endedAt          DateTime?
+
+  playerMatches    PlayerMatch[]
+  matchChallenges  MatchChallenge[]
+}
+
+model PlayerMatch {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  matchId       Int
+  score         Int           @default(0)
+  joinedAt      DateTime      @default(now())
+
+  user          User          @relation(fields: [userId], references: [id])
+  match         Match         @relation(fields: [matchId], references: [id])
+  submissions   Submission[]
+
+  @@unique([userId, matchId])
+}
+
+model Challenge {
+  id             Int             @id @default(autoincrement())
+  title          String
+  description    String
+  input          String
+  output         String
+  difficulty     Difficulty
+  createdAt      DateTime        @default(now())
+
+  matchChallenges MatchChallenge[]
+  submissions     Submission[]
+}
+
+model MatchChallenge {
+  id           Int       @id @default(autoincrement())
+  matchId      Int
+  challengeId  Int
+  index        Int
+
+  match        Match     @relation(fields: [matchId], references: [id])
+  challenge    Challenge @relation(fields: [challengeId], references: [id])
+
+  @@unique([matchId, challengeId])
+  @@unique([matchId, index])
+}
+
+model Submission {
+  id             Int        @id @default(autoincrement())
+  playerMatchId  Int
+  challengeId    Int
+  code           String
+  output         String?
+  isCorrect      Boolean    @default(false)
+  language       Language   @default(C)
+  submittedAt    DateTime   @default(now())
+
+  playerMatch    PlayerMatch @relation(fields: [playerMatchId], references: [id])
+  challenge      Challenge   @relation(fields: [challengeId], references: [id])
+}
