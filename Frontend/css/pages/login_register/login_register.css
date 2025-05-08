@@ -118,12 +118,12 @@ body {
         background: transparent;
         position: absolute;
         right: 10px;
-        top: 50%;
         text-decoration: none;
         font-size: 30px;
         color: #ff00e0;
-        font-weight: semi-bold;
         margin: -15px auto;
+        top: calc(50% - 3.5px);
+
         &:hover {
           cursor: pointer;
           color: #ff00e15f; /* Altere a cor conforme sua preferência */
@@ -264,6 +264,17 @@ body {
     animation: none !important;
     opacity: 1 !important;
   }
+  @media (max-width: 265px) {
+    .right-side {
+      form {
+        .input-container {
+          .forgot-password {
+            top: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (orientation: landscape) {
@@ -272,6 +283,17 @@ body {
     width: 30%;
     flex-grow: 1;
     order: 2;
+  }
+  @media (max-width: 910px) {
+    .right-side {
+      form {
+        .input-container {
+          .forgot-password {
+            top: 0;
+          }
+        }
+      }
+    }
   }
 }
 

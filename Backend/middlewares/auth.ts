@@ -1,4 +1,3 @@
-// Backend/middlewares/auth.ts
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
@@ -16,8 +15,10 @@ export function verificarToken(
   const [, token] = authHeader.split(" ");
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    (req as any).usuario = decoded;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+      id: number;
+    };
+    (req as any).usuarioId = decoded.id;
     next();
   } catch (error) {
     return res.status(401).json({ error: "Token inválido ou expirado." });
