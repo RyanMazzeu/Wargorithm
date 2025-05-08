@@ -118,25 +118,38 @@ main {
 
 @media (orientation: landscape){
   main{
-    justify-content: start;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    margin-top: calc(100px + (100vh - 100px - 497px)/2);
     
+    overflow-y: auto;
+    margin: auto;
+    margin-top: calc(100px + (100vh - 100px - 317px)/2);
+    flex-direction: row;
+    max-width: 603.44px;
+    max-height: 317px;
+    
+
+    header{
+      margin: 0;
+    }
     .profile-header{
-      margin-top: 0;
+      max-width: 367px;
+      max-height: 317px;
+      height: 100%;
+      padding: 15px;
+      padding-right: 60px;
+      background-color: #c5cfb5;
+
       img{
         display: flex;
-        max-width: 320px;
-        margin: 0 auto;
-        background-color: #c5cfb5;
+        width: 100%;
+        height: 100%;
 
       }
     }
     .profile-details{
-      max-width: 320px;
-      width: 100%;
+      max-height: 317px;
+      margin: 0;
       margin-top: 0;
+      margin-right:0;
       background-color: #c5cfb5;
     }
 
