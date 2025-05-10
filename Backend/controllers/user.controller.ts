@@ -1,20 +1,23 @@
-import { Request, Response } from "express";
+import { RequestHandler } from "express";
 import * as userRepository from "../repositories/user.repository";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser: RequestHandler = async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password || password.length < 6) {
-    return res.status(400).json({ error: "Dados inválidos." });
+    res.status(400).json({ error: "Dados inválidos." });
+    return;
   }
 
   const userExists = await userRepository.findByEmail(email);
-  if (userExists)
-    return res.status(400).json({ error: "Email já cadastrado." });
+  if (userExists) {
+    res.status(400).json({ error: "Email já cadastrado." });
+    return;
+  }
 
-  const hashed = await bcrypt.hash(password, 10);
+  const hashed = await argon2.hash(password); // Argon2 hash
   const user = await userRepository.create({
     name,
     email,
@@ -25,12 +28,14 @@ export const registerUser = async (req: Request, res: Response) => {
   res.status(201).json(user);
 };
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userRepository.findByEmail(email);
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ error: "Credenciais inválidas." });
+  if (!user || !(await argon2.verify(user.password, password))) {
+    // Argon2 verify
+    res.status(401).json({ error: "Credenciais inválidas." });
+    return;
   }
 
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
@@ -50,13 +55,14 @@ export const loginUser = async (req: Request, res: Response) => {
   });
 };
 
-export const getProfile = async (req: Request, res: Response) => {
+export const getProfile: RequestHandler = async (req, res) => {
   const userId = (req as any).usuarioId;
 
   try {
     const user = await userRepository.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: "Usuário não encontrado." });
+      res.status(404).json({ error: "Usuário não encontrado." });
+      return;
     }
 
     res.status(200).json(user);

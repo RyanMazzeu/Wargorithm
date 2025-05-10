@@ -1,15 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 
-export function verificarToken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export const verificarToken: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ error: "Token não fornecido." });
+    res.status(401).json({ error: "Token não fornecido." });
+    return;
   }
 
   const [, token] = authHeader.split(" ");
@@ -18,9 +15,10 @@ export function verificarToken(
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
       id: number;
     };
+
     (req as any).usuarioId = decoded.id;
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Token inválido ou expirado." });
+    res.status(401).json({ error: "Token inválido ou expirado." });
   }
-}
+};

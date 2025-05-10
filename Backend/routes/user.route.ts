@@ -4,7 +4,7 @@ import { verificarToken } from "../middlewares/auth";
 
 const router = Router();
 
-router.post("/usuarios", userController.registerUser);
+router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.get("/perfil", verificarToken, userController.getProfile);
 

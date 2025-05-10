@@ -1,7 +1,7 @@
 import API_URL from "./url.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("signup-form"); // <— pega aqui, depois que o DOM já está pronto
+  const form = document.getElementById("signup-form");
   if (!form) {
     console.error("Formulário de cadastro não encontrado na página!");
     return;
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log({ name: nome, email, password: senha });
 
-      const response = await fetch(`${API_URL}/api/usuarios`, {
+      const response = await fetch(`${API_URL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: nome, email, password: senha }),

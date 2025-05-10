@@ -1,0 +1,8 @@
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npx tsc && node dist/server.js"

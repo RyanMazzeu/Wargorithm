@@ -114,8 +114,8 @@ main {
   }
 }
 
-@media (max-height: 740px){
-  main{
+@media (max-height: 740px) {
+  main {
     justify-content: flex-start;
   }
 }
@@ -124,19 +124,19 @@ main {
   main {
     overflow-y: auto;
     margin: auto;
-    margin-top: calc(100px + (100vh - 100px - 317px) / 2);
+    margin-top: calc(100px + (100vh - 100px - 350px) / 2);
     flex-direction: row;
     max-width: 610.44px;
-    max-height: 340px;
+    max-height: 350px;
 
     header {
+      height: 350px;
       margin: 0;
     }
     .profile-header {
-
-      height: 100%;
       padding: 15px;
-      padding-right: 60px;
+      padding-right: 20px;
+      padding-left: 20px;
       background-color: #c5cfb5;
 
       img {
@@ -146,7 +146,10 @@ main {
       }
     }
     .profile-details {
-      max-height: 100%;
+      max-width: 400px;
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 0;
       margin: 0;
       margin-top: 0;
       margin-right: 0;
