@@ -3,8 +3,147 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int                 @id @default(autoincrement())
+  name                String
+  email               String              @unique
+  password            String
+  ranking             Int                 @default(0)
+  victories           Int                 @default(0)
+  photo               String              @default("https://img.icons8.com/?size=100&id=23264&format=png&color=000000")
+  createdAt           DateTime            @default(now())
+
+  sentFriends         Friendship[]        @relation("UserA")
+  receivedFriends     Friendship[]        @relation("UserB")
+  sentRequests        FriendRequest[]     @relation("Sender")
+  receivedRequests    FriendRequest[]     @relation("Receiver")
+  sentMessages        Message[]
+  matchesAsA          Match[]             @relation("PlayerA")
+  matchesAsB          Match[]             @relation("PlayerB")
+  wonMatches          Match[]             @relation("Winner")
+  submissions         Submission[]
+  notifications       Notification[]
+  challengeFeedbacks  ChallengeFeedback[]
+  matchHistory        MatchHistory[]
+}
+
+model Friendship {
+  id         Int      @id @default(autoincrement())
+  userA      User     @relation("UserA", fields: [userAId], references: [id])
+  userAId    Int
+  userB      User     @relation("UserB", fields: [userBId], references: [id])
+  userBId    Int
+  createdAt  DateTime @default(now())
+  messages   Message[]
+}
+
+model FriendRequest {
+  id           Int               @id @default(autoincrement())
+  sender       User              @relation("Sender", fields: [senderId], references: [id])
+  senderId     Int
+  receiver     User              @relation("Receiver", fields: [receiverId], references: [id])
+  receiverId   Int
+  status       FriendRequestStatus
+  sentAt       DateTime          @default(now())
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  sentAt     DateTime @default(now())
+  sender     User     @relation(fields: [senderId], references: [id])
+  senderId   Int
+  friendship Friendship @relation(fields: [friendshipId], references: [id])
+  friendshipId Int
+}
+
+model Challenge {
+  id            Int                @id @default(autoincrement())
+  title         String
+  description   String
+  input         String
+  expectedOutput String
+  difficulty    Difficulty
+  createdAt     DateTime           @default(now())
+  matches       Match[]
+  feedbacks     ChallengeFeedback[]
+}
+
+model Match {
+  id              Int              @id @default(autoincrement())
+  startedAt       DateTime
+  durationSeconds Int
+  status          MatchStatus
+  createdAt       DateTime         @default(now())
+  playerA         User             @relation("PlayerA", fields: [playerAId], references: [id])
+  playerAId       Int
+  playerB         User             @relation("PlayerB", fields: [playerBId], references: [id])
+  playerBId       Int
+  winner          User?            @relation("Winner", fields: [winnerId], references: [id])
+  winnerId        Int?
+  challenge       Challenge        @relation(fields: [challengeId], references: [id])
+  challengeId     Int
+  submissions     Submission[]
+  matchHistory    MatchHistory[]
+}
+
+model Submission {
+  id         Int       @id @default(autoincrement())
+  code       String
+  language   Language
+  isCorrect  Boolean
+  submittedAt DateTime @default(now())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  match      Match     @relation(fields: [matchId], references: [id])
+  matchId    Int
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  message    String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+}
+
+model ChallengeFeedback {
+  id         Int      @id @default(autoincrement())
+  rating     Int
+  comment    String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  challenge  Challenge @relation(fields: [challengeId], references: [id])
+  challengeId Int
+}
+
+model MatchHistory {
+  id            Int     @id @default(autoincrement())
+  scoreGained   Int
+  wasVictory    Boolean
+  user          User    @relation(fields: [userId], references: [id])
+  userId        Int
+  match         Match   @relation(fields: [matchId], references: [id])
+  matchId       Int
+}
+
+// Enums
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum MatchStatus {
+  IN_PROGRESS
+  FINISHED
+  CANCELED
 }
 
 enum Difficulty {
@@ -13,142 +152,12 @@ enum Difficulty {
   HARD
 }
 
-enum MatchStatus {
-  WAITING
-  IN_PROGRESS
-  FINISHED
-}
-
 enum Language {
+  JAVASCRIPT
+  PYTHON
+  JAVA
   C
   CPP
-  JAVA
-  PYTHON
-  JAVASCRIPT
-  RUBY
-  CSHARP
-}
-
-enum FriendRequestStatus {
-  PENDING
-  ACCEPTED
-  DECLINED
-}
-
-model User {
-  id              Int              @id @default(autoincrement())
-  name            String
-  email           String           @unique
-  password        String
-  ranking         Int              @default(0)
-  victories       Int              @default(0)
-  photo           String?
-  createdAt       DateTime         @default(now())
-
-  sentRequests    FriendRequest[]  @relation("SentRequests")
-  receivedRequests FriendRequest[] @relation("ReceivedRequests")
-
-  friendshipsA    Friendship[]     @relation("FriendshipsA")
-  friendshipsB    Friendship[]     @relation("FriendshipsB")
-  messagesSent    Message[]        @relation("MessagesSent")
-  playerMatches   PlayerMatch[]
-}
-
-model FriendRequest {
-  id        Int                  @id @default(autoincrement())
-  senderId  Int
-  receiverId Int
-  status    FriendRequestStatus
-  createdAt DateTime             @default(now())
-
-  sender    User                 @relation("SentRequests", fields: [senderId], references: [id])
-  receiver  User                 @relation("ReceivedRequests", fields: [receiverId], references: [id])
-}
-
-model Friendship {
-  id        Int       @id @default(autoincrement())
-  userAId   Int
-  userBId   Int
-  createdAt DateTime  @default(now())
-
-  userA     User      @relation("FriendshipsA", fields: [userAId], references: [id])
-  userB     User      @relation("FriendshipsB", fields: [userBId], references: [id])
-
-  messages  Message[]
-  @@unique([userAId, userBId])
-}
-
-model Message {
-  id            Int       @id @default(autoincrement())
-  friendshipId  Int
-  senderId      Int
-  content       String
-  createdAt     DateTime  @default(now())
-
-  friendship    Friendship @relation(fields: [friendshipId], references: [id])
-  sender        User       @relation("MessagesSent", fields: [senderId], references: [id])
-}
-
-model Match {
-  id               Int               @id @default(autoincrement())
-  status           MatchStatus      @default(WAITING)
-  startedAt        DateTime?
-  endedAt          DateTime?
-
-  playerMatches    PlayerMatch[]
-  matchChallenges  MatchChallenge[]
-}
-
-model PlayerMatch {
-  id            Int           @id @default(autoincrement())
-  userId        Int
-  matchId       Int
-  score         Int           @default(0)
-  joinedAt      DateTime      @default(now())
-
-  user          User          @relation(fields: [userId], references: [id])
-  match         Match         @relation(fields: [matchId], references: [id])
-  submissions   Submission[]
-
-  @@unique([userId, matchId])
-}
-
-model Challenge {
-  id             Int             @id @default(autoincrement())
-  title          String
-  description    String
-  input          String
-  output         String
-  difficulty     Difficulty
-  createdAt      DateTime        @default(now())
-
-  matchChallenges MatchChallenge[]
-  submissions     Submission[]
-}
-
-model MatchChallenge {
-  id           Int       @id @default(autoincrement())
-  matchId      Int
-  challengeId  Int
-  index        Int
-
-  match        Match     @relation(fields: [matchId], references: [id])
-  challenge    Challenge @relation(fields: [challengeId], references: [id])
-
-  @@unique([matchId, challengeId])
-  @@unique([matchId, index])
-}
-
-model Submission {
-  id             Int        @id @default(autoincrement())
-  playerMatchId  Int
-  challengeId    Int
-  code           String
-  output         String?
-  isCorrect      Boolean    @default(false)
-  language       Language   @default(C)
-  submittedAt    DateTime   @default(now())
-
-  playerMatch    PlayerMatch @relation(fields: [playerMatchId], references: [id])
-  challenge      Challenge   @relation(fields: [challengeId], references: [id])
+  GO
+  RUST
 }

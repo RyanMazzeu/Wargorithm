@@ -1,13 +1,11 @@
 import API_URL from "./url.js";
+const form = document.querySelector("form");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
+function login() {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     const email = document.getElementById("email").value;
     const senha = document.getElementById("password").value;
-
     try {
       const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
@@ -29,4 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("❌ Erro de conexão com o servidor");
     }
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", login);

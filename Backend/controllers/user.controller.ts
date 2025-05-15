@@ -22,7 +22,6 @@ export const registerUser: RequestHandler = async (req, res) => {
     name,
     email,
     password: hashed,
-    photo: null,
   });
 
   res.status(201).json(user);
