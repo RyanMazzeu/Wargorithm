@@ -70,3 +70,45 @@ export const getProfile: RequestHandler = async (req, res) => {
     res.status(500).json({ error: "Erro interno do servidor." });
   }
 };
+
+export const updateProfile: RequestHandler = async (req, res) => {
+  const userId = (req as any).usuarioId;
+  const { name, email, password } = req.body;
+
+  try {
+    const user = await userRepository.findById(userId);
+    if (!user) {
+      res.status(404).json({ error: "Usuário não encontrado." });
+      return;
+    }
+
+    const updatedUser = await userRepository.update(userId, {
+      name,
+      email,
+      password,
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error("Erro ao atualizar perfil:", error);
+    res.status(500).json({ error: "Erro interno do servidor." });
+  }
+};
+
+export const deleteProfile: RequestHandler = async (req, res) => {
+  const userId = (req as any).usuarioId;
+
+  try {
+    const user = await userRepository.findById(userId);
+    if (!user) {
+      res.status(404).json({ error: "Usuário não encontrado." });
+      return;
+    }
+
+    await userRepository.deleteUser(userId);
+    res.status(200).json({ message: "Usuário deletado com sucesso." });
+  } catch (error) {
+    console.error("Erro ao deletar perfil:", error);
+    res.status(500).json({ error: "Erro interno do servidor." });
+  }
+};
