@@ -1,0 +1,243 @@
+/* src/app/page.module.css */
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  max-width: 180px;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 100%;
+  height: 32px;
+  filter: var(--logo-filter);
+}
+
+.loginForm {
+  background: var(--form-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  max-width: 450px;
+  width: 100%;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+  height: 640px;
+  position: relative;
+}
+
+.loginForm h2 {
+  font-family: Inter, sans-serif;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  text-align: left;
+  font-size: 2.4rem;
+  color: var(--text-primary);
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  display: block;
+  font-family: Inter, sans-serif;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.4375em;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Estilo para o ícone de "olho" do input de senha no Edge (tema escuro) */
+:global(.dark-theme) .inputGroup input::-ms-reveal {
+  filter: grayscale(100%) brightness(0%) invert(100%);
+}
+
+/* Estilo para o ícone de "olho" do input de senha no Edge (tema claro ou padrão) */
+:global(.light-theme) .inputGroup input::-ms-reveal, /* Adicionado para tema claro */
+.inputGroup input::-ms-reveal { /* Padrão se nenhuma classe de tema específica */
+  filter: grayscale(100%) brightness(0%);
+}
+
+
+.inputGroup input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.rememberMeContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.rememberMeGroup {
+  display: flex;
+  align-items: center;
+}
+
+.rememberMeGroup input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: auto;
+  accent-color: var(--checkbox-accent);
+}
+
+.rememberMeGroup label {
+  margin-bottom: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to bottom, #282828, var(--button-primary-bg)); /* Ajustado para ter um degradê consistente ou use só var() */
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.loginButton:hover {
+  background: linear-gradient(to bottom, #1c1c1c, #101010c6); /* Ajustado para ter um degradê consistente ou use só var() */
+}
+
+.forgotPasswordLinkContainer {
+  text-align: center;
+  margin-bottom: 2rem; /* Re-adicionado, estava faltando no original mas parecia intencional */
+  font-size: 0.9rem;
+}
+
+.optionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Mudado de center para flex-start */
+  max-height: 70px; /* Re-adicionado */
+  margin: 0; /* Re-adicionado */
+  margin-bottom: 1rem; /* Adicionado um espaçamento abaixo */
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0.7rem 0;
+  color: #aaa;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--divider-color);
+  transition: border-color 0.3s ease;
+}
+
+.dividerText {
+  color: var(--divider-text-color);
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.socialLoginContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.socialButton {
+  flex: 1;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--button-social-border);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: var(--button-social-bg);
+  color: var(--button-social-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.socialButton:hover {
+  background-color: var(--button-social-bg-hover);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.6rem;
+}
+
+.registerLink {
+  position: absolute;
+  bottom: 27px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  color: var(
+    --text-accent,
+    #007bff /* Fallback caso a variável não esteja definida */
+  );
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: underline;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+
+.linkButton:hover {
+  color: var(--text-accent-hover, #0056b3 /* Fallback */);
+}
+
+/* Sobrescreve para o tema escuro baseado na classe do body */
+:global(.dark-theme) .loginButton {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+:global(.dark-theme) .loginButton:hover {
+  background: var(--button-primary-bg-hover);
+}

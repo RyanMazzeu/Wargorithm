@@ -1,0 +1,128 @@
+/* src/app/globals.css */
+
+/* Definições de variáveis globais de marca (OPCIONAL, mas bom para consistência) */
+:root {
+  --brand-black: #000000; /* Cor preta da sua marca */
+  --brand-white: #ffffff; /* Cor branca da sua marca */
+  --brand-shocking-pink: #ce5dda; /* Cor rosa choque da sua marca */
+  --brand-purple-accent: rgb(161, 51, 173); /* Roxo do seu gradiente */
+}
+
+/* Estilos base e resets */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; /* Usando a lista mais completa que você tinha */
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg); /* Aplicado pelos temas abaixo */
+  color: var(--text-primary); /* Aplicado pelos temas abaixo */
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* TEMA CLARO (aplicado quando a classe .light-theme está no body) */
+.light-theme {
+  --brand-neon-blue: #0ccaff;
+  --brand-shocking-pink: #ce5dda;
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+  --brand-dark-grey: #1a1a1a;
+  --brand-light-grey: #f0f0f0;
+
+  --page-bg: radial-gradient(
+    ellipse at center,
+    rgba(252, 252, 252, 0.25) 0%,
+    hsl(240, 77%, 91%) 75%
+  );
+  --form-bg: var(--brand-white);
+  --text-primary: var(--brand-black);
+  --text-secondary: #333333;
+  --text-accent: var(--brand-shocking-pink);
+  --text-accent-hover: #a849b0;
+
+  --button-primary-bg: var(--brand-black);
+  --button-primary-text: var(--brand-white);
+  --button-primary-bg-hover: #1c1c1c;
+
+  --button-social-bg: var(--brand-white);
+  --button-social-text: var(--brand-black);
+  --button-social-border: #cccccc;
+  --button-social-bg-hover: var(--brand-light-grey);
+
+  --input-bg: var(--brand-white);
+  --input-border: #dddddd;
+  --input-text: var(--brand-black);
+  --input-placeholder: #aaaaaa;
+  --divider-color: #cccccc;
+  --divider-text-color: var(--brand-black);
+  --modal-bg: var(--brand-white);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.6);
+  --icon-color-default: var(--brand-black);
+  --checkbox-accent: var(--brand-shocking-pink);
+
+  --logo-filter: none;
+}
+
+/* TEMA ESCURO (aplicado quando a classe .dark-theme está no body) */
+.dark-theme {
+  --page-bg: radial-gradient(
+    ellipse at center,
+    var(--brand-purple-accent) 10%,
+    var(--brand-black) 90%
+  );
+  --form-bg: #1e1e1e;
+  --text-primary: var(--brand-white);
+  --text-secondary: #bbbbbb;
+  --text-accent: var(--brand-shocking-pink);
+  --text-accent-hover: #a849b0;
+
+  --button-primary-bg: var(--brand-white);
+  --button-primary-text: var(--brand-black);
+  --button-primary-bg-hover: #e0e0e0;
+
+  --button-social-bg: rgba(0, 0, 0, 0.3); /* Um pouco mais sutil */
+  --button-social-text: var(--brand-white);
+  --button-social-border: #444444; /* Borda um pouco mais clara que o fundo */
+  --button-social-bg-hover: rgba(255, 255, 255, 0.1);
+
+  --input-bg: #2c2c2c;
+  --input-border: #4f4f4f; /* Borda um pouco mais visível */
+  --input-text: var(--brand-white);
+  --input-placeholder: #777777;
+
+  --divider-color: #444444;
+  --divider-text-color: var(--brand-white);
+
+  --modal-bg: #2c2c2c;
+  --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+  --icon-color-default: var(--brand-white);
+  --checkbox-accent: var(--brand-shocking-pink);
+
+  --logo-filter: none; /* Assumindo que o logo é claro ou se adapta bem ao escuro */
+}
+
+/* Estilos genéricos para links e títulos, se desejar (do antigo index.css) */
+/* Pode comentar ou remover se não quiser esses padrões */
+a {
+  font-weight: 500;
+  text-decoration: inherit; /* Removido cor padrão para que o tema controle */
+}
+/* a:hover { */
+/* color: #535bf2; /* Removido cor padrão */
+/* } */
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}

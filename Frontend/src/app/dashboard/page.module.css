@@ -1,0 +1,184 @@
+/* src/pages/HomePage/HomePage.module.css */
+.homePageContainer {
+  display: flex;
+  flex-direction: column; /* Organiza o layout em coluna (AppBar/BottomNav e depois mainContent) */
+  min-height: 100vh;    /* Garante que o container ocupe pelo menos a altura total da viewport */
+  background-color: var(--background-color, #f4f6f8); /* Cor de fundo padrão, pode ser sobrescrita por temas */
+}
+/* Mobile (imagem primeiro) */
+@media (max-width: 768px) {
+  .leftSection {
+    order: 2;
+  }
+
+  .rightSection {
+    order: 1;
+  }
+}
+
+/* Estilos para a Navegação Desktop (AppBar) */
+.desktopNav {
+  background-color: var(--surface-color, #ffffff) !important; /* Cor de fundo do AppBar */
+  color: var(--on-surface-color, #000000) !important;       /* Cor do texto no AppBar */
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between; /* Distribui o logo, tabs e botão "Leave" */
+  align-items: center;
+  padding: 0 24px; /* Espaçamento interno do Toolbar */
+  min-height: 64px; /* Altura mínima padrão do Toolbar do Material-UI */
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.toolbar > .MuiTabs-root { /* Estilizando o componente Tabs dentro do Toolbar */
+  flex-grow: 1;
+}
+
+/* Estilos para a Navegação Mobile (BottomNavigation) */
+.bottomNav {
+  width: 100%;
+  position: fixed; /* Fixo na parte inferior da tela */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  background-color: var(--surface-color, #ffffff);
+  z-index: 1000; /* Para ficar acima de outro conteúdo que possa rolar por baixo */
+}
+
+/* Estilos para o Conteúdo Principal (onde o <Outlet /> renderiza as páginas) */
+.mainContent {
+  flex-grow: 1; /* Faz o conteúdo principal ocupar todo o espaço vertical restante */
+  overflow-y: auto; /* Permite rolagem vertical se o conteúdo for maior que a tela */
+  /*
+  Ajustes de padding para não sobrepor navegações fixas:
+  Se .desktopNav for position:fixed, adicione padding-top:
+  padding-top: 84px; /* (altura do AppBar [ex: 64px] + padding desejado [ex: 20px]) */
+  /*
+  Se .bottomNav estiver visível (mobile), adicione padding-bottom:
+  */
+}
+
+/* Media query para aplicar padding-bottom no mainContent quando a BottomNavigation estiver ativa (mobile) */
+@media (max-width: 600px) {
+  .mainContent {
+    padding-bottom: 55.2px; /* (altura da BottomNavigation [ex: 56px] + padding desejado [ex: 20px]) */
+  }
+}
+
+/* Opcional: Estilos para os botões e tabs se precisar de personalização extra além do Material-UI */
+/*
+.desktopNav .MuiTab-root {
+  color: var(--primary-color, #6200ee);
+}
+
+.desktopNav .MuiButton-contained {
+  background-color: var(--secondary-color, #03dac6);
+  color: var(--on-secondary-color, #000000);
+}
+
+.bottomNav .MuiBottomNavigationAction-root.Mui-selected {
+  color: var(--primary-color, #6200ee);
+}
+*/
+
+/* src/components/HomeContent/HomeContent.module.css */
+.homeContentContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px; /* Espaçamento interno */
+  gap: 30px; /* Espaço entre as seções left e right */
+  width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  .homeContentContainer {
+    min-height: calc(100vh - 84.02px);
+    
+  }
+}
+
+
+.leftSection {
+  max-width: 550px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaço entre os elementos internos da seção esquerda */
+}
+
+.leftSection h1 {
+  font-size: 2.8rem;
+  color: #ffffff; /* Ajuste a cor conforme o tema */
+  line-height: 1.2;
+  margin: 0;
+}
+
+.leftSection p {
+  font-size: 1.1rem;
+  color: #ffffff; /* Ajuste a cor conforme o tema */
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.ctaGroup span {
+  font-size: 0.9rem;
+  color: #777; /* Ajuste a cor conforme o tema */
+}
+
+.rightSection {
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeImage {
+  width: 100%;
+  height: auto;
+  max-width: 400px; /* Garante que a imagem não fique excessivamente grande */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+  .homeContentContainer {
+    flex-direction: column;
+    text-align: center;
+
+    padding: 20px;
+  }
+
+  .leftSection {
+    text-align: center;
+    align-items: center;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+  .leftSection h1 {
+    font-size: 2.2rem;
+  }
+  .leftSection p {
+    font-size: 1rem;
+  }
+}
+
