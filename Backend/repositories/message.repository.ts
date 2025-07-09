@@ -32,3 +32,22 @@ export const createMessage = async (
     },
   });
 };
+
+/**
+ * Atualiza o conteúdo de uma mensagem.
+ */
+export const updateMessage = async (messageId: number, content: string) => {
+  return prisma.message.update({
+    where: { id: messageId },
+    data: { content },
+  });
+};
+
+/**
+ * Remove uma mensagem.
+ */
+export const deleteMessage = async (messageId: number) => {
+  return prisma.message.delete({
+    where: { id: messageId },
+  });
+};
