@@ -17,7 +17,7 @@ export const getMessages = async (friendshipId: number) => {
 };
 
 /**
- * Cria uma nova mensagem em uma amizade.
+ * Cria uma nova mensagem em uma amizade e inclui dados do remetente.
  */
 export const createMessage = async (
   senderId: number,
@@ -29,6 +29,11 @@ export const createMessage = async (
       senderId,
       friendshipId,
       content,
+    },
+    include: {
+      sender: {
+        select: { id: true, name: true, photo: true },
+      },
     },
   });
 };

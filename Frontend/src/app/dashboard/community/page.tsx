@@ -14,6 +14,7 @@ import {
   Alert,
   List,
   ListItem,
+  ListItemButton,
   ListItemAvatar,
   Avatar,
   ListItemText,
@@ -27,6 +28,8 @@ import {
   CardActions,
   Grid,
   Badge,
+  Fab,
+  TextField,
 } from "@mui/material";
 import {
   PersonAdd,
@@ -36,7 +39,9 @@ import {
   PeopleOutline,
   PersonRemove,
   Undo,
+  ChatBubbleOutline,
 } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 // Tipos para os dados da API (Ajustados para corresponder ao seu backend)
 interface ApiUser {
@@ -47,20 +52,34 @@ interface ApiUser {
   ranking?: number;
   victories?: number;
 }
+// Tipo de amigo contendo friendshipId retornado pela API
+interface Friend extends ApiUser {
+  friendshipId: number;
+}
 
+// Tipos para requisições de amizade
 interface FriendRequest {
   id: number;
   senderId: number;
   receiverId: number;
   status: "PENDING" | "ACCEPTED" | "REJECTED";
-  sender?: ApiUser; // A API já inclui o sender
-  receiver?: ApiUser; // A API já inclui o receiver
+  sender?: ApiUser;
+  receiver?: ApiUser;
+}
+
+// Tipos para chat
+interface Message {
+  id: number;
+  content: string;
+  sentAt: string;
+  sender: ApiUser;
 }
 
 const CommunityPage: React.FC = () => {
   const { user, isLoading: authLoading } = useAuth();
   const API_URL =
     process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+  const router = useRouter();
 
   // Early return se não autenticado ou carregando
   if (authLoading || !user) {
@@ -78,7 +97,7 @@ const CommunityPage: React.FC = () => {
 
   // --- Estados para cada tipo de dado ---
   const [allUsers, setAllUsers] = useState<ApiUser[]>([]);
-  const [friends, setFriends] = useState<ApiUser[]>([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
   const [incomingRequests, setIncomingRequests] = useState<FriendRequest[]>([]);
   const [sentRequests, setSentRequests] = useState<FriendRequest[]>([]);
 
@@ -99,6 +118,12 @@ const CommunityPage: React.FC = () => {
     severity: "success" | "error" | "info";
   } | null>(null);
   const [currentTab, setCurrentTab] = useState(0);
+
+  // NOVO ESTADO: Para controle da janela de chat
+  const [chatOpen, setChatOpen] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState("");
 
   // --- Funções Auxiliares ---
   const handleCloseSnackbar = () => setSnackbar(null);
@@ -136,7 +161,7 @@ const CommunityPage: React.FC = () => {
           // Atualiza o estado correspondente
           if (key === "users")
             setAllUsers(data.filter((u: ApiUser) => u.id !== user.id));
-          if (key === "friends") setFriends(data);
+          if (key === "friends") setFriends(data as Friend[]);
           if (key === "incoming") setIncomingRequests(data);
           if (key === "sent") setSentRequests(data);
         } catch (error) {
@@ -281,7 +306,14 @@ const CommunityPage: React.FC = () => {
         : "receiver" in item
         ? item.receiver
         : (item as ApiUser) || undefined;
-    const safePerson = person ?? { id: 0, name: "Usuário desconhecido" };
+    const safePerson: ApiUser = person ?? {
+      id: 0,
+      name: "Usuário desconhecido",
+      email: "",
+      photo: "",
+      ranking: 0,
+      victories: 0,
+    };
     const key = "id" in item ? item.id : 0;
 
     return (
@@ -290,16 +322,28 @@ const CommunityPage: React.FC = () => {
           secondaryAction={
             <Stack direction="row" spacing={1}>
               {type === "friend" && (
-                <Button
-                  variant="outlined"
-                  color="error"
-                  size="small"
-                  startIcon={<PersonRemove />}
-                  onClick={() => unfriend(safePerson.id)}
-                  disabled={actionStates[`unfriend-${safePerson.id}`]}
-                >
-                  Remover
-                </Button>
+                <>
+                  <IconButton
+                    color="primary"
+                    onClick={() => {
+                      // Use the full Friend object to get friendshipId
+                      setSelectedFriend(item as Friend);
+                      setChatOpen(true);
+                    }}
+                  >
+                    <ChatBubbleOutline />
+                  </IconButton>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    startIcon={<PersonRemove />}
+                    onClick={() => unfriend(safePerson.id)}
+                    disabled={actionStates[`unfriend-${safePerson.id}`]}
+                  >
+                    Remover
+                  </Button>
+                </>
               )}
               {type === "incoming" && "id" in item && (
                 <>
@@ -375,169 +419,357 @@ const CommunityPage: React.FC = () => {
     </Typography>
   );
 
+  // Send chat message
+  const sendChatMessage = async () => {
+    if (!selectedFriend || !newMessage.trim()) return;
+    try {
+      const res = await fetch(
+        `${API_URL}/friends/${selectedFriend.friendshipId}/messages`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({ content: newMessage }),
+        }
+      );
+      if (res.ok) {
+        setNewMessage("");
+        // refetch
+        const msg: Message = await res.json();
+        setChatMessages((prev) => [...prev, msg]);
+      }
+    } catch {}
+  };
+
+  // Fetch past chat messages when a friend is selected
+  useEffect(() => {
+    const loadChatMessages = async () => {
+      if (!selectedFriend || !user.token) {
+        setChatMessages([]);
+        return;
+      }
+      try {
+        const res = await fetch(
+          `${API_URL}/friends/${selectedFriend.friendshipId}/messages`,
+          { headers: { Authorization: `Bearer ${user.token}` } }
+        );
+        if (res.ok) {
+          const msgs: Message[] = await res.json();
+          setChatMessages(msgs);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar mensagens:", error);
+      }
+    };
+    loadChatMessages();
+  }, [selectedFriend, user.token]);
+
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Paper elevation={3} sx={{ p: { xs: 2, md: 3 } }}>
-        <Typography
-          variant="h4"
-          component="h1"
-          gutterBottom
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <PeopleOutline sx={{ mr: 1, fontSize: "2.5rem" }} /> Comunidade
-        </Typography>
-        <Divider sx={{ mb: 2 }} />
-
-        <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
-          <Tabs
-            value={currentTab}
-            onChange={handleTabChange}
-            aria-label="Abas da comunidade"
-            variant="scrollable"
-            scrollButtons="auto"
-            allowScrollButtonsMobile
+    <>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Paper elevation={3} sx={{ p: { xs: 2, md: 3 } }}>
+          <Typography
+            variant="h4"
+            component="h1"
+            gutterBottom
+            sx={{ display: "flex", alignItems: "center" }}
           >
-            <Tab
-              label="Meus Amigos"
-              icon={<PeopleOutline />}
-              iconPosition="start"
-            />
-            <Tab
-              label={
-                <Badge color="primary" badgeContent={incomingRequests.length}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    {" "}
-                    <PersonAdd /> Solicitações Recebidas
-                  </Box>
-                </Badge>
-              }
-            />
-            <Tab
-              label="Encontrar Usuários"
-              icon={<GroupAdd />}
-              iconPosition="start"
-            />
-            <Tab
-              label="Solicitações Enviadas"
-              icon={<Undo />}
-              iconPosition="start"
-            />
-          </Tabs>
-        </Box>
+            <PeopleOutline sx={{ mr: 1, fontSize: "2.5rem" }} /> Comunidade
+          </Typography>
+          <Divider sx={{ mb: 2 }} />
 
-        <Box role="tabpanel" hidden={currentTab !== 0}>
-          {loading.friends ? (
-            <CircularProgress />
-          ) : friends.length > 0 ? (
-            <List>
-              {friends.map((friend) => renderListItem(friend, "friend"))}
-            </List>
-          ) : (
-            renderEmptyState(
-              "Você ainda não tem amigos. Adicione alguns na aba 'Encontrar Usuários'."
-            )
-          )}
-        </Box>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
+            <Tabs
+              value={currentTab}
+              onChange={handleTabChange}
+              aria-label="Abas da comunidade"
+              variant="scrollable"
+              scrollButtons="auto"
+              allowScrollButtonsMobile
+            >
+              <Tab
+                label="Meus Amigos"
+                icon={<PeopleOutline />}
+                iconPosition="start"
+              />
+              <Tab
+                label={
+                  <Badge color="primary" badgeContent={incomingRequests.length}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      {" "}
+                      <PersonAdd /> Solicitações Recebidas
+                    </Box>
+                  </Badge>
+                }
+              />
+              <Tab
+                label="Encontrar Usuários"
+                icon={<GroupAdd />}
+                iconPosition="start"
+              />
+              <Tab
+                label="Solicitações Enviadas"
+                icon={<Undo />}
+                iconPosition="start"
+              />
+            </Tabs>
+          </Box>
 
-        <Box role="tabpanel" hidden={currentTab !== 1}>
-          {loading.incoming ? (
-            <CircularProgress />
-          ) : incomingRequests.length > 0 ? (
-            <List>
-              {incomingRequests.map((req) => renderListItem(req, "incoming"))}
-            </List>
-          ) : (
-            renderEmptyState("Nenhuma solicitação de amizade recebida.")
-          )}
-        </Box>
+          <Box role="tabpanel" hidden={currentTab !== 0}>
+            {loading.friends ? (
+              <CircularProgress />
+            ) : friends.length > 0 ? (
+              <List>
+                {friends.map((friend) => renderListItem(friend, "friend"))}
+              </List>
+            ) : (
+              renderEmptyState(
+                "Você ainda não tem amigos. Adicione alguns na aba 'Encontrar Usuários'."
+              )
+            )}
+          </Box>
 
-        {/* MODIFICADO: Aba para encontrar usuários agora usa 'discoverableUsers' */}
-        <Box role="tabpanel" hidden={currentTab !== 2}>
-          {loading.users ? (
-            <CircularProgress />
-          ) : discoverableUsers.length > 0 ? (
-            <Grid container spacing={2}>
-              {discoverableUsers.map((u) => (
-                <Grid key={u.id}>
-                  <Card
-                    variant="outlined"
+          <Box role="tabpanel" hidden={currentTab !== 1}>
+            {loading.incoming ? (
+              <CircularProgress />
+            ) : incomingRequests.length > 0 ? (
+              <List>
+                {incomingRequests.map((req) => renderListItem(req, "incoming"))}
+              </List>
+            ) : (
+              renderEmptyState("Nenhuma solicitação de amizade recebida.")
+            )}
+          </Box>
+
+          {/* MODIFICADO: Aba para encontrar usuários agora usa 'discoverableUsers' */}
+          <Box role="tabpanel" hidden={currentTab !== 2}>
+            {loading.users ? (
+              <CircularProgress />
+            ) : discoverableUsers.length > 0 ? (
+              <Grid container spacing={2}>
+                {discoverableUsers.map((u) => (
+                  <Grid key={u.id}>
+                    <Card
+                      variant="outlined"
+                      sx={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                          <Avatar
+                            src={u.photo || undefined}
+                            sx={{ width: 56, height: 56 }}
+                          >
+                            {u.name?.charAt(0).toUpperCase()}
+                          </Avatar>
+                          <Box>
+                            <Typography variant="h6">{u.name}</Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              Ranking: {u.ranking ?? "N/A"}
+                            </Typography>
+                          </Box>
+                        </Stack>
+                      </CardContent>
+                      <CardActions sx={{ justifyContent: "flex-end" }}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          startIcon={<PersonAdd />}
+                          onClick={() => sendFriendRequest(u.id)}
+                          disabled={actionStates[`send-${u.id}`]}
+                        >
+                          {actionStates[`send-${u.id}`] ? (
+                            <CircularProgress size={20} color="inherit" />
+                          ) : (
+                            "Adicionar"
+                          )}
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              renderEmptyState(
+                "Não há novos usuários para adicionar no momento."
+              )
+            )}
+          </Box>
+
+          <Box role="tabpanel" hidden={currentTab !== 3}>
+            {loading.sent ? (
+              <CircularProgress />
+            ) : sentRequests.length > 0 ? (
+              <List>
+                {sentRequests.map((req) => renderListItem(req, "sent"))}
+              </List>
+            ) : (
+              renderEmptyState(
+                "Você não enviou nenhuma solicitação de amizade."
+              )
+            )}
+          </Box>
+        </Paper>
+
+        {snackbar && (
+          <Snackbar
+            open={snackbar.open}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          >
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity={snackbar.severity}
+              sx={{ width: "100%" }}
+              variant="filled"
+            >
+              {snackbar.message}
+            </Alert>
+          </Snackbar>
+        )}
+      </Container>
+
+      {/* Botão flutuante de chat */}
+      <Fab
+        color="primary"
+        onClick={() => setChatOpen((open) => !open)}
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        <ChatBubbleOutline />
+      </Fab>
+
+      {/* Janela de chat */}
+      {chatOpen && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 80,
+            right: 16,
+            width: 300,
+            height: 400,
+            bgcolor: "background.paper",
+            boxShadow: 3,
+            borderRadius: 2,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* Header */}
+          <Box
+            sx={{
+              p: 1,
+              borderBottom: 1,
+              borderColor: "divider",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="subtitle1" color="text.primary">
+              {selectedFriend ? selectedFriend.name : "Chat"}
+            </Typography>
+            <IconButton
+              size="small"
+              onClick={() => {
+                setSelectedFriend(null);
+                setChatOpen(false);
+              }}
+            >
+              <CancelOutlined />
+            </IconButton>
+          </Box>
+
+          {/* Conteúdo */}
+          <Box sx={{ flex: 1, overflowY: "auto", p: 1 }}>
+            {!selectedFriend ? (
+              // Lista de amigos
+              <List>
+                {friends.map((f) => (
+                  <ListItem key={f.id}>
+                    <ListItemButton onClick={() => setSelectedFriend(f)}>
+                      <ListItemText
+                        primary={f.name}
+                        primaryTypographyProps={{ color: "text.primary" }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              // Mensagens
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                {chatMessages.map((m) => (
+                  <Box
+                    key={m.id}
                     sx={{
-                      height: "100%",
                       display: "flex",
                       flexDirection: "column",
+                      alignItems:
+                        m.sender.id === user.id ? "flex-end" : "flex-start",
+                      mb: 1,
                     }}
                   >
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Stack direction="row" spacing={2} alignItems="center">
-                        <Avatar
-                          src={u.photo || undefined}
-                          sx={{ width: 56, height: 56 }}
-                        >
-                          {u.name?.charAt(0).toUpperCase()}
-                        </Avatar>
-                        <Box>
-                          <Typography variant="h6">{u.name}</Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            Ranking: {u.ranking ?? "N/A"}
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                    <CardActions sx={{ justifyContent: "flex-end" }}>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        startIcon={<PersonAdd />}
-                        onClick={() => sendFriendRequest(u.id)}
-                        disabled={actionStates[`send-${u.id}`]}
-                      >
-                        {actionStates[`send-${u.id}`] ? (
-                          <CircularProgress size={20} color="inherit" />
-                        ) : (
-                          "Adicionar"
-                        )}
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            renderEmptyState("Não há novos usuários para adicionar no momento.")
+                    <Typography variant="caption" color="text.secondary">
+                      {m.sender.name} -{" "}
+                      {new Date(m.sentAt).toLocaleTimeString()}
+                    </Typography>
+                    <Box
+                      sx={{
+                        bgcolor:
+                          m.sender.id === user.id ? "primary.main" : "grey.300",
+                        color:
+                          m.sender.id === user.id
+                            ? "primary.contrastText"
+                            : "text.primary",
+                        p: 1,
+                        borderRadius: 1,
+                        maxWidth: "80%",
+                      }}
+                    >
+                      {m.content}
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </Box>
+
+          {/* Input de mensagem */}
+          {selectedFriend && (
+            <Box
+              sx={{
+                p: 1,
+                borderTop: 1,
+                borderColor: "divider",
+                display: "flex",
+                gap: 1,
+              }}
+            >
+              <TextField
+                fullWidth
+                size="small"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Digite sua mensagem"
+              />
+              <Button
+                variant="contained"
+                size="small"
+                onClick={sendChatMessage}
+              >
+                Enviar
+              </Button>
+            </Box>
           )}
         </Box>
-
-        <Box role="tabpanel" hidden={currentTab !== 3}>
-          {loading.sent ? (
-            <CircularProgress />
-          ) : sentRequests.length > 0 ? (
-            <List>
-              {sentRequests.map((req) => renderListItem(req, "sent"))}
-            </List>
-          ) : (
-            renderEmptyState("Você não enviou nenhuma solicitação de amizade.")
-          )}
-        </Box>
-      </Paper>
-
-      {snackbar && (
-        <Snackbar
-          open={snackbar.open}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity={snackbar.severity}
-            sx={{ width: "100%" }}
-            variant="filled"
-          >
-            {snackbar.message}
-          </Alert>
-        </Snackbar>
       )}
-    </Container>
+    </>
   );
 };
 

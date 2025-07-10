@@ -36,7 +36,6 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // 1. OBTENHA O isLoading AQUI
   const { user, logout, isLoading } = useAuth();
 
   const pathname = usePathname();
@@ -44,7 +43,6 @@ export default function DashboardLayout({
   const [navValue, setNavValue] = useState(0);
   const isMobile = useMediaQuery("(max-width:600px)");
 
-  // 2. CORRIJA O useEffect PARA ESPERAR O FIM DO CARREGAMENTO
   useEffect(() => {
     // Só tome a decisão de redirecionar DEPOIS que a verificação terminar
     if (!isLoading && !user) {
@@ -68,14 +66,11 @@ export default function DashboardLayout({
     router.push(paths[newValue]);
   };
 
-  // 3. ADICIONE UMA TELA DE CARREGAMENTO ENQUANTO A VERIFICAÇÃO OCORRE
   if (isLoading) {
     // Você pode criar um componente de Loading mais bonito depois
     return <div>Carregando...</div>;
   }
 
-  // Se o useEffect decidir que o usuário não está logado, ele vai redirecionar.
-  // Retornar null aqui previne que o layout seja renderizado para um usuário deslogado.
   if (!user) {
     return null;
   }
